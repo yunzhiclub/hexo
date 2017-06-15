@@ -25,6 +25,7 @@ notifications:
 
 # 脚本
 script:
+  - git clone https://github.com/stkevintan/hexo-theme-material-flow themes/material-flow
   - hexo generate
 
 
