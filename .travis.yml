@@ -25,7 +25,7 @@ notifications:
 
 # 脚本
 script:
-  - git clone https://github.com/stkevintan/hexo-theme-material-flow themes/material-flow
+  - git clone --depth=1 https://github.com/stkevintan/hexo-theme-material-flow themes/material-flow
   - hexo generate
 
 
@@ -38,7 +38,6 @@ cache:
 # 脚本执行成功后，进入文档文件夹，并强行push到项目的gh-page分支，生成项目文档
 after_success:
   - cd public
-  - more index.html
   - git init
   - git config user.name "${GH_USER_NAME}"
   - git config user.email "{GH_USER_EMAIL}"
