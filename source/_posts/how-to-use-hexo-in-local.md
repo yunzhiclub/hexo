@@ -17,10 +17,17 @@ $ npm install -g hexo-cli
 
 # clone团队项目
 项目地址： `https://github.com/yunzhiclub/hexo`
-clone后，使用命令行，进行所在文件夹。进行`npm`依赖安装：
+clone后，使用命令行，进入所在文件夹。进行`npm`依赖安装：
 ```
 $ npm install
 ```
+clone主题
+```
+$ git clone --depth=1 https://github.com/mengyunzhi/hexo-theme-material-flow themes/material-flow
+```
+
+# 新建分支
+在项目master分支的基础上，新建自己的分支。
 
 # 启动项目
 ```
@@ -42,14 +49,14 @@ $ hexo new "new title"
 title: 如何在本地使用hexo发表文章
 date: 2017-05-31 16:57:35
 tags: hexo
-category: 潘杰
+category: teacherPan
 ---
 ```
 
 此时，我们将这里的`title`修改为中文。`tags`是标签，如果是多个，可以这样写:`[html,css]`。
 `category`类别，这里写上自己的名字。
 
-内容无误后，进行`git commit -a -m "这里写提交的文字描述"`，然后`git push`,将刚刚发布的内容送到服务器。
+内容无误后，进行`git commit -a -m "这里写提交的文字描述"`，然后进行`pull request`。
 
 ---
 更多内容请参考 ：[https://hexo.io/docs/index.html](https://hexo.io/docs/index.html)
