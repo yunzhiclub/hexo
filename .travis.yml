@@ -1,10 +1,6 @@
 # 声明使用语言
-language: java
+language: 
   
-# 声明JDK版本
-jdk:
-  - oraclejdk8
-
 # 声明使用的服务
 services:
 
