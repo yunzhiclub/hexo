@@ -1,7 +1,7 @@
 # Header
 menu:
-  Home: /
-  Archives: /archives
+  首页: /
+  最新文章: /archives
 rss: /atom.xml
 
 # Content
@@ -24,7 +24,7 @@ index_widgets:
 # - archive
 
 # widget behavior
-archive_type: 'monthly'
+archive_type: 'weekly'
 show_count: false
 
 # Miscellaneous
