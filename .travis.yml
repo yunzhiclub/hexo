@@ -25,7 +25,7 @@ notifications:
 
 # 脚本
 script:
-  - git clone --depth=1 https://github.com/stkevintan/hexo-theme-material-flow themes/material-flow
+  - git clone --depth=1 https://github.com/mengyunzhi/hexo-theme-material-flow themes/material-flow
   - hexo generate
 
 
