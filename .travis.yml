@@ -1,0 +1,49 @@
+# 声明使用语言
+language: java
+  
+# 声明JDK版本
+jdk:
+  - oraclejdk8
+
+# 声明使用的服务
+services:
+
+# 指定使用软件的版本号
+addons:
+  apt:
+    packages:
+
+# 运行前设置
+before_script:
+  # 安装nodejs
+  - nvm install 0.10
+  - nvm use 0.10
+
+  # 安装npm软件包
+  - npm install
+
+# 通知方式
+notifications:
+  email: false
+  webhooks: https://oapi.dingtalk.com/robot/send?access_token=ce61cd70c5fa6e5fd1d066f424e4d1511c530f03108d4ccd17cd9c121c97b3a4
+
+# 脚本
+script:
+  - hexo generate
+
+
+# 声明缓存
+cache:
+  directories:
+  - .autoconf
+  - node_modules
+
+# 脚本执行成功后，进入文档文件夹，并强行push到项目的gh-page分支，生成项目文档
+after_success:
+  - cd public
+  - git init
+  - git config user.name "${GH_USER_NAME}"
+  - git config user.email "{GH_USER_EMAIL}"
+  - git add . ; git commit -m "自动发送至gh-page"
+  - git status
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
