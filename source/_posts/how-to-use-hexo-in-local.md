@@ -2,7 +2,7 @@
 title: 如何在本地使用hexo发表文章
 date: 2017-05-31 16:57:35
 tags: hexo
-category: 潘杰
+category: teacherPan
 ---
 
 # 安装hexo
@@ -18,6 +18,9 @@ $ npm install -g hexo-cli
 # clone团队项目
 项目地址： `https://github.com/yunzhiclub/hexo`
 clone后，使用命令行，进入所在文件夹。进行`npm`依赖安装：
+
+<!--more-->
+
 ```
 $ npm install
 ```
