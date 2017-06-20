@@ -1,9 +1,10 @@
 ---
 title: FreeBSD中，重新启动jar文件
 date: 2017-06-19 16:06:11
-tags: freebsd jar forever
+tags: [freebsd,backgroud,forever]
+category: teacherPan
 ---
-在`freebsd`中，如果我们以`ssh`进行登录，直接启动`jar`文件的话，会发现，当窗口关闭后，运行的程序也被自动终止了。此时，我们应该使用以下命令使其能够在后台运行，这样，即使是我们终止了`ssh`窗口。程序也将正常运行。
+在`freebsd`中，如果我们以`ssh`进行登录，直接启动`jar`文件的话，会发现，当窗口关闭后，运行的程序也被自动终止了。怎么样才能实现当对话关闭后，程序仍将继续运行呢？
 
 # 运行程序
 我们使用`mvn package`对应用程序进行打包后，后得到一个可以执行的`.jar`文件，可以在命令行中，使用`java -jar`来运行该`jar`文件。在进行后台运行时，需要在最后面加入`&`，比如:
@@ -11,6 +12,7 @@ tags: freebsd jar forever
 # java -jar api-0.0.3-SNAPSHOT.jar --datasource.port=3633 &
 ````
 
+<!--more-->
 # 终止程序
 我们知道当运行程序时，可以按`ctrl+c`来终止程序。那么，如何终止正在后台运行的程序呢？
 
