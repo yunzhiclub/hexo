@@ -25,14 +25,14 @@ spring.jpa.hibernate.ddl-auto=${jpa.ddl-auto:create}
 # build project
 使用git bash进行项目文件夹（即存在pom.xml的文件夹）。
 执行命令：
-```
+```bash
 # mvn package
 ```
-系统将首先进行`mvn test`，测试无误后，将自动在./target文件夹中，生成了一个`jar`文件。该`jar`文件即为java应用。
+系统将首先进行`mvn test`，测试无误后，将自动在`./target`文件夹中，生成了一个`jar`文件。该`jar`文件即为java应用。
 
 # 启动应用
 我们进入jar文件所在路径，并使用java命令启动`jar`文件
-```
+```bash
 # java -jar xxxxx.xxx.jar
 ```
 此时，应用程序就被我们启动了。
@@ -44,40 +44,39 @@ spring.jpa.hibernate.ddl-auto=${jpa.ddl-auto:create}
 在服务器上启动mysql（可以是xampp这种集成环境，也可以是单独安装的），然后使用navicat创建一个项目使用的数据库（名字要相同）。如果已经有数据库了，可以先删除，然后再创建。
 
 ## 执行jar文件
-我们在服务器上存放jar文件的路径上启动git bash。然后和我们在本机执行过程一样。
-```
+我们在服务器上存放jar文件的路径上启动`git bash`。然后和我们在本机执行过程一样。
+```bash
 # java -jar xxxxx.xxx.jar
 ```
 
 程序就这样被启动了！
 
 那么如何重新布署呢？
-在执行上述操作前，我们只需要先关掉上次正在执行的jar程序就可以了。
+在执行上述操作前，我们只需要先关掉上次正在执行的`jar`程序就可以了。
 
 # 更改运行参数
 有时候，我们服务器的运行环境和本地可能会有些出入。比如服务器的数据库的端口不是3306。而是3633。这时候该怎么办呢？
-我们通过观察程序的配置文件不能发现，有很多`${xxx}`的配置信息，这就是为我们自定义配置准备的。
+我们通过观察程序的配置文件不能发现，有很多`${xxx:yyy}`的配置信息，这就是为我们自定义配置准备的。其中`xxx`是配置项，`yyy`是默认值。
+
 ```
 # 在项目初始化时，重新创建数据表
 spring.jpa.hibernate.ddl-auto=${jpa.ddl-auto:create}
 # 指定连接的类型为mysql 连接的地址为：localhost 端口为3306 ，数据为springmvc
 spring.datasource.url=jdbc:mysql://127.0.0.1:${datasource.port:3306}/measurement?useUnicode=true&characterEncoding=utf-8
-
 # 用户名为root
 spring.datasource.username=${datasource.username:root}
 # 密码为空
 spring.datasource.password=${datasource.password:}
-
 server.port=${port:8080}
 ```
 比如，我们想将数据库的端口号改为3633，则应该使用:
-```
+```bash
 # java -jar xxx.xxx.jar --datasource.port=3633
 ```
 
 再比如，我们想将数据库的端口号改为3633的同时，还想将程序的端口修改为8081
 则使用：
-```
+```bash
 # java -jar xxx.xxx.jar --datasource.port=3633 --port=8081
 ```
 
