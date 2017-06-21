@@ -30,6 +30,8 @@ spring.jpa.hibernate.ddl-auto=${jpa.ddl-auto:create}
 ```
 系统将首先进行`mvn test`，测试无误后，将自动在`./target`文件夹中，生成了一个`jar`文件。该`jar`文件即为java应用。
 
+> 如果你想跳过`mvn test`直接生成`.jar`文件，可以使用`mvn package -DskipTests`命令来替换`mvn package`
+
 # 启动应用
 我们进入jar文件所在路径，并使用java命令启动`jar`文件
 ```bash
