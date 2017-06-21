@@ -1,7 +1,7 @@
 ---
 title: 复写Bower.json文件比较好的方法
 date: 2017-06-20 20:26:29
-tags: Bower.json
+tags: Bower
 category: liuxi
 ---
 ## Override Bower Packages
