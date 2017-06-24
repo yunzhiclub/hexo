@@ -64,7 +64,7 @@ link: function postLink(scope) {
 ```
 
 ## 完成yunzhipost.js对应的V层样式
-根据2.1中提到的模板文件地址，在V层的directive文件夹下，新建yunzhiPost.html文件，用于编写该指令对应的V层样式。
+根据2.1中提到的模板文件地址，在V层的`directive`文件夹下，新建`yunzhiPost.html`文件，用于编写该指令对应的V层样式。
 ```html
 <!--岗位-->
 <ui-select ng-model="post.selected" theme="bootstrap" ng-disabled="disabled">
@@ -77,12 +77,12 @@ link: function postLink(scope) {
 
 # 完成指令的数据读取
 在完成以上步骤后，只需要再对后台数据进行读取，这个指令就写完了！
-同样的，我们首先用yoeman新建service文件，在service文件中实现对后台数据的获取。
+同样的，我们首先用`yoeman`新建`service`文件，在`service`文件中实现对后台数据的获取。
 ```shell
 yo angular:service PostService
 ```
-执行完这条命令以后会自动生成相应的js文件。
-以PostService文件为例，我们在service里面定义一个方法，用来获取在data文件夹中写入的模拟json数据。
+执行完这条命令以后会自动生成相应的`js`文件。
+以`PostService`文件为例，我们在`service`里面定义一个方法，用来获取在`data`文件夹中写入的模拟`json`数据。
 ```javascript
 var getCurrentUserPostArray;
 getCurrentUserPostArray = function(callback) {
@@ -94,7 +94,7 @@ return {
     getCurrentUserPostArray: getCurrentUserPostArray
 };
 ```
-> 与后台数据对接的时候只需要把json数据删掉，将数据获取方式改为后台数据获取即可。
+> 与后台数据对接的时候只需要把`json`数据删掉，将数据获取方式改为后台数据获取即可。
 
 # 将指令写在V层
 接下来，我们只要在V层需要的位置写入该指令就可以直接使用了。
