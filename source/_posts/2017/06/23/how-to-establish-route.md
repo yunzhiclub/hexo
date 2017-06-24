@@ -11,6 +11,8 @@ category: chenyuanyuan
 ![](/images\2017\06\23\how-to-establish-route/page1.jpg)
 确定好每个菜单名对应的英文名称后，开始进行路由的建立
 
+<!--more-->
+
 # 采用yoeman建立路由
 打开`git shell`进入到本项目的`Webapp`文件下，输入下面命令
 ```shell
