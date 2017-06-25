@@ -84,6 +84,9 @@ tags: [spring mvc,data binding]
 6. 发送数据时，将不同的实体数据做为json对象的不同属性发送。
 
 # 代码片断
+
+> [问题相关项目代码](https://github.com/yunzhiclub/MeasurementItemFrontEnd/blob/014fc96f75373e07a7d61d150b1e9beb7fb6b64e/api/src/main/java/com/mengyunzhi/measurement/controller/UserController.java), [单元测试代码](https://github.com/yunzhiclub/MeasurementItemFrontEnd/blob/78a6e661bfd49c97d9d5fa9181bd493aa256e531/api/src/test/java/com/mengyunzhi/measurement/controller/UserControllerTest.java)
+
 ```java
 package com.mengyunzhi.measurement.controller;
 

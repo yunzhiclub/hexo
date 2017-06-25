@@ -1,5 +1,5 @@
 ---
-title: FreeBSD中，重新启动jar文件
+title: FreeBSD中，重新启动并在后台运行jar文件
 date: 2017-06-19 16:06:11
 tags: [freebsd,backgroud,forever]
 category: teacherPan
