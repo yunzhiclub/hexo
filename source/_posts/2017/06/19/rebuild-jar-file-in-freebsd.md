@@ -10,7 +10,7 @@ category: teacherPan
 我们使用`mvn package`对应用程序进行打包后，后得到一个可以执行的`.jar`文件，可以在命令行中，使用`java -jar`来运行该`jar`文件。在进行后台运行时，需要在最后面加入`&`，比如:
 ```shell
 # java -jar api-0.0.3-SNAPSHOT.jar --datasource.port=3633 &
-````
+```
 
 <!--more-->
 # 终止程序
@@ -33,10 +33,17 @@ root   94194   0.0 15.1 2151736 313104  4- S    Wed05PM      9:21.50 /usr/local/
 # kill -9 94194
 ```
 
+# 总结
+1. 将程序设置为后台运行，在窗口关闭时，程序仍然将自动运行。
+2. 后台运行的程序，需要使用`kill -9`来终止进程。
+3. 在使用`kill -9`来终止进行前，需要使用`ps -aux`来查看所想终止程序的进程号。
 
-> 如果是启动`nodejs`中的程序，比如`http-server`，则需要使用`node`中的`forever`来
+<hr />
+如果是nodejs的应用程序呢？比如http-server.
+
+如果是启动`nodejs`中的程序，比如`http-server`，则需要使用`node`中的`forever`来
 比如： 
-```shell
+```bash
 # npm install -g forever
 # forever start `http-server /mengyunzhi/api/8080.Measurement/dist/ -p 8005` &
 ```
