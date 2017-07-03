@@ -68,8 +68,11 @@ public interface UserRepository extends CrudRepository<User, Long> {
   Long deleteByLastname(String lastname);
   List<User> removeByLastname(String lastname);
 }
+<<<<<<< HEAD
 
 ```
+=======
+>>>>>>> origin/zhangjiahao
 
 ## 4.2 查询方式
 
