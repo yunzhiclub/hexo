@@ -72,8 +72,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
   List<User> removeByLastname(String lastname);
 }
 
-```
-
 
 ## 4.2 查询方式
 
@@ -150,6 +148,7 @@ interface UserRepository extends MyBaseRepository<User, Long> {
   User findByEmailAddress(EmailAddress emailAddress);
 }
 ```
+
 
 在第一步中你可以为你的所有的域存储库（domain repository）定义一个公有的基础接口（base interface）并且公开findOne()和save()等方法。这些方法将会被路由到（routed into）Spring Data提供的你选择的基本的存储repository实现。例如：SimpleJpaRepository，因为他们符合CrudRepository的方法声定义（signature）。所以UserRepository将会可以保存users，通过id寻找某一用户，并且通过email address触发（trigger）查询去寻找Users。
 
@@ -252,3 +251,4 @@ repository代理有两种方式从方法名去派生（derive）出特定于存�
 ### 4.4.1 查询查找策略
 
 截下来的策略是可用于repository基础结构（infrastructure）以解决查询的。你可以在命名空间中通过query-lookup-strategy属性配置这个策略
+
