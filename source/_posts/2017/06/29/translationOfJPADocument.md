@@ -4,6 +4,8 @@ date: 2017-06-29 20:06:12
 tags: [JPA,documents,translation]
 category: zhangjiahao
 ---
+Spring Data JPA官方文档 [https://docs.spring.io/spring-data/jpa/docs/current/reference/html/](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
+
 # 4.使用Spring数据仓库
 
 抽象的说，Spring数据仓库()目标是显著的（significantly）减少为各种持久化存储实现数据访问所需要的示例代码的数量。
@@ -11,6 +13,7 @@ category: zhangjiahao
 > spring数据存储仓库文档和模块
 > 这一章节解释Spring数据仓库的核心概念和接口，本章节的信息是从（pull from）Spring Data Common模块中提取的。它使用了JPA模块的配置（configuration）和代码实例。适应了XML声明的命名空间和类型，并且扩展了你正在使用的特定模块的类型的等价物。命名空间的引用（reference）涵盖了支持存储库API的所有Spring数据模块支持的XML配置，存储库查询关键字涵盖了通常由存储库抽象支持的查询方法关键字。有关模块的具体特性的详细信息，请参阅本文档模块的章节。
 
+<!-- more -->
 ## 4.1核心概念
 
 Spring数据仓库（Spring Data Repository）的中心接口是仓库（Repository）。它需要域类来管理，并且需要域类的id类型作为参数（argument）类型。接口起的主要作用就是作为一个标记接口去捕获要处理的类型并且帮助你去发现该接口的拓展接口。CrudRepository为正在被管理的实体类提供了复杂的（sophisticated）增删改查方法。
@@ -68,6 +71,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
   Long deleteByLastname(String lastname);
   List<User> removeByLastname(String lastname);
 }
+
 
 ## 4.2 查询方式
 
@@ -145,4 +149,106 @@ interface UserRepository extends MyBaseRepository<User, Long> {
 }
 ```
 
-在第一步中你可以为你的所有的域存储库（domain repository）定义一个公有的基础接口（base interface）并且公开findOne()和save()等方法。这些方法将会被路由到（routed into）Spring Data提供的你选择的基本的存储repository实现。例如：
+
+在第一步中你可以为你的所有的域存储库（domain repository）定义一个公有的基础接口（base interface）并且公开findOne()和save()等方法。这些方法将会被路由到（routed into）Spring Data提供的你选择的基本的存储repository实现。例如：SimpleJpaRepository，因为他们符合CrudRepository的方法声定义（signature）。所以UserRepository将会可以保存users，通过id寻找某一用户，并且通过email address触发（trigger）查询去寻找Users。
+
+> 请注意，中间库接口（intermediate repository interface）使用@NoRepositoryBean注解。请确保你在所有的repository接口上添加了这个注解，Spring Data不应该在运行的时候创建实例。
+
+## 4.3.2 使用具有多个Spring数据模块的存储仓库（Repositories）
+在你的项目中使用独一无二的Spring Data模块将会使事情变得简单。在定义的范围内所有的repository接口都绑定到Spring Data模块中。有时候应用们需要使用不止一个Spring Data模块。在这样的情况下，在定义一个repository应该要求区分（distinguish）持久性技术。Spring Data进入严格的repository配置模式（mode）因为它能在类的路径下检测（detect）出复杂的repository工厂。严格的配置要求存储库或域类的详细信息，以决定关于存储库定义的Spring数据模块绑定:
+
+> 1.如果repository的定义继承了特定于模块的repository，那么这就是特定的Spring data模块它的有效候选（valid candidate）。
+> 2.如果域类带有特定于模块的类型注释，那么它就是Spring Data模块的有效候选。Spring Data模块接受第三方（third party）的注释（例如就像JPA的 @Entity），也提供了自己供Spring Data MongoDB/Spring Data Elasticsearch使用的注释例如@Document。
+
+示例8 使用Module-specific接口定义的Repository
+
+```
+interface MyRepository extends JpaRepository<User, Long> { }
+@NoRepositoryBean
+interface MyBaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
+  …
+}
+interface UserRepository extends MyBaseRepository<User, Long> {
+  …
+}
+```
+
+上例中，MyRepository和UserRepository在他们的类型分级结构（hierarchy）继承了JpaRepository。他们是Spring Data JPA模块的有效候选。
+
+示例9 使用一般的接口定义的Repository
+
+```
+interface AmbiguousRepository extends Repository<User, Long> {
+ …
+}
+@NoRepositoryBean
+interface MyBaseRepository<T, ID extends Serializable> extends CrudRepository<T, ID> {
+  …
+}
+interface AmbiguousUserRepository extends MyBaseRepository<User, Long> {
+  …
+}
+```
+
+AmbiguousRepository和AmbiguousUserRepository在他们的类型层次结构中仅仅继承了Repository和CrudRepository。使用一个独一无二的Spring数据模块是完全没问题的，复杂的模块不能区分这些repository应该绑定（bound）哪一个特定的Spring Data。
+
+````
+示例10 使用域类和注解绑定Repository
+
+```
+interface PersonRepository extends Repository<Person, Long> {
+ …
+}
+@Entity
+public class Person {
+  …
+}
+interface UserRepository extends Repository<User, Long> {
+ …
+}
+@Document
+public class User {
+  …
+}
+````
+
+PersonRepository引用了Person，Person类使用了JPA注解@Entity，所以很明显这个repository属于Spring Data JPA。 UserRepository使用了带有Spring Data MongoDB的@Document注解的 User。
+
+示例11 使用带有混合注释的域类的Repository定义
+
+```
+interface JpaPersonRepository extends Repository<Person, Long> {
+ …
+}
+interface MongoDBPersonRepository extends Repository<Person, Long> {
+ …
+}
+@Entity
+@Document
+public class Person {
+  …
+}
+```
+
+> 这个例子展示（show）了一个使用JPA和Spring Data MongoDB一起注解的域类。它定义了两个repository，JpaPersonRepository和MongoDBPersonRepository。一个是用于JPA的，另外一个是用于MongoDB的。Spring Data不再能够区分存储库（repository）从而导致未定义的行为。
+
+Repository类型细节和定义的域类注解是用于严格的repository配置，这写配置为专门的Spring Data模块识别出repository的候选。在同一域类型上使用多个持久性技术特定的注释可以跨多个持久性技术重用域类型，但是Spring Data不可以决定绑定repository的唯一模块。
+
+最后一个方式去区分repository是确定repository的基础包。基础包定义浏览一个repository接口定义的开始点,这意味着（imply）让repository的定义在合适的包中。默认地，注解的驱动（annotation-driven）配置使用配置类（configuration class）中的包。在基于XML（XML-based）配置中的基本包是必需的。
+
+示例12 基础包的注解驱动配置
+
+```
+@EnableJpaRepositories(basePackages = "com.acme.repositories.jpa")
+@EnableMongoRepositories(basePackages = "com.acme.repositories.mongo")
+interface Configuration { }
+```
+
+## 4.4 定义查询方法
+
+repository代理有两种方式从方法名去派生（derive）出特定于存储（store-specific）的查询，或者通过使用手动（manually）定义查询。可用的选项（available options）取决于真实的存储。然而，必须有一个策略，决定了创建什么实际查询。让我们看一下可用的选项吧。
+
+### 4.4.1 查询查找策略
+
+截下来的策略是可用于repository基础结构（infrastructure）以解决查询的。你可以在命名空间中通过query-lookup-strategy属性配置这个策略
+
