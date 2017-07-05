@@ -4,6 +4,8 @@ date: 2017-06-29 20:06:12
 tags: [JPA,documents,translation]
 category: zhangjiahao
 ---
+Spring Data JPA官方文档 [https://docs.spring.io/spring-data/jpa/docs/current/reference/html/](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
+
 # 4.使用Spring数据仓库
 
 抽象的说，Spring数据仓库()目标是显著的（significantly）减少为各种持久化存储实现数据访问所需要的示例代码的数量。
@@ -11,6 +13,7 @@ category: zhangjiahao
 > spring数据存储仓库文档和模块
 > 这一章节解释Spring数据仓库的核心概念和接口，本章节的信息是从（pull from）Spring Data Common模块中提取的。它使用了JPA模块的配置（configuration）和代码实例。适应了XML声明的命名空间和类型，并且扩展了你正在使用的特定模块的类型的等价物。命名空间的引用（reference）涵盖了支持存储库API的所有Spring数据模块支持的XML配置，存储库查询关键字涵盖了通常由存储库抽象支持的查询方法关键字。有关模块的具体特性的详细信息，请参阅本文档模块的章节。
 
+<!-- more -->
 ## 4.1核心概念
 
 Spring数据仓库（Spring Data Repository）的中心接口是仓库（Repository）。它需要域类来管理，并且需要域类的id类型作为参数（argument）类型。接口起的主要作用就是作为一个标记接口去捕获要处理的类型并且帮助你去发现该接口的拓展接口。CrudRepository为正在被管理的实体类提供了复杂的（sophisticated）增删改查方法。
@@ -68,11 +71,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
   Long deleteByLastname(String lastname);
   List<User> removeByLastname(String lastname);
 }
-<<<<<<< HEAD
 
 ```
-=======
->>>>>>> origin/zhangjiahao
+
 
 ## 4.2 查询方式
 

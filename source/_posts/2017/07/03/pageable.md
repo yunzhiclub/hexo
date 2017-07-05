@@ -19,7 +19,7 @@ public interface InstrumentTypeRepository extends PagingAndSortingRepository<Ins
 
 }
 ```
-
+<!-- more -->
 ## M层直接调用方法
 这样，在InstrumentTypeServiceImpl类中就可以调用PagingAndSortingRepository中的分页方法了。下面是对分页数为20的代码的编写：
 

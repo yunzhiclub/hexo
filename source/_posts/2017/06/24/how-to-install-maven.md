@@ -6,7 +6,7 @@ category: zhangjiahao
 ---
 # 问题描述
 在做单元测试以及对项目文件进行打包的时候，我们需要用到mvntest、mvnpackage等命令，这样做的前提是我们的电脑中必须安装好了maven，那么maven应该如何安装呢？
-
+<!-- more -->
 # 安装过程
 ## 下载maven
 首先我们应该去maven的下载官网：[http://maven.apache.org/download.cgi](http://maven.apache.org/download.cgi)，找到如下图所示的文件进行下载。
