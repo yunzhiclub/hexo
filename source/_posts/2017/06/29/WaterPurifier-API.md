@@ -96,6 +96,8 @@ POST
 + id。类型：Long。说明：净水器编号。
 + shouldRecharge.。类型：int。说明：应该充值水量。
 + actualRecharge。类型：int。说明：实际充值水量。
+
+## 请求头信息
 + timestamp。类型：String。说明：时间戳。
 + randomString。类型：String。说明：随机生成的字符串。
 + encryptionInfo。类型：String。将timestamp、randomString、"mengyunzhi"进行字符串拼接（格式：timestamp + randomString + "mengyunzhi"），并对拼接结果进行sha1加密，生成encryptionInfo。
@@ -103,17 +105,17 @@ POST
 ## 请求示例
 ```
 POST /api/isRechargeOk HTTP/1.1
+
 Content-Type: application/json;charset=UTF-8
 Host: https://api.water.mengyunzhi.com
-Content-Length: 233
+Timestamp: 1497457292548
+RandomString: unzdtggyopn1fl7sx68b8olxr
+EncryptionInfo: 37cde59cfa3384c84d9bf7545be348bc880c79bd
    
 {
 	"id": 1,
 	"shouldRecharge": 200,
-	"actualRecharge": 200,
-	"timestamp": 1497457292548,
-	"randomString": "unzdtggyopn1fl7sx68b8olxr",
-	"encryptionInfo": "37cde59cfa3384c84d9bf7545be348bc880c79bd"
+	"actualRecharge": 200
 }
 ```
 
@@ -138,7 +140,9 @@ POST
 + usedBeforeWaterQuality。类型：int。说明：净水前水质。
 + usedAfterWaterQuality。类型：int。说明：净水后水质。
 + usedWaterQuantity。类型：int。说明：用水量。
-+ lastInteractTime。类型：Long。说明：上次交互时间。
++ lastInteractTime。类型：Long。说明：上次交互的时间戳。
+
+## 请求头信息
 + timestamp。类型：String。说明：时间戳。
 + randomString。类型：String。说明：随机生成的字符串。
 + encryptionInfo。类型：String。将timestamp、randomString、"mengyunzhi"进行字符串拼接（格式：timestamp + randomString + "mengyunzhi"），并对拼接结果进行sha1加密，生成encryptionInfo。
@@ -148,17 +152,16 @@ POST
 POST /api/useInfo HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: https://api.water.mengyunzhi.com
-Content-Length: 306
+Timestamp: 1497457292548
+RandomString: unzdtggyopn1fl7sx68b8olxr
+EncryptionInfo: 37cde59cfa3384c84d9bf7545be348bc880c79bd
    
 {
 	"id": "1",
 	"usedBeforeWaterQuality": 200,
 	"usedAfterWaterQuality": 2030,
 	"usedWaterQuantity": 2200,
-	"lastInteractTime": 2022301,
-	"timestamp": 1497457292548,
-	"randomString": "unzdtggyopn1fl7sx68b8olxr",
-	"encryptionInfo": "37cde59cfa3384c84d9bf7545be348bc880c79bd"
+	"lastInteractTime": 1497457292548
 }	
 ```
 
