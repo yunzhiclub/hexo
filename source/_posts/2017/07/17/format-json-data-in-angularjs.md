@@ -4,7 +4,8 @@ date: 2017-07-17 09:38:49
 category: teacherPan
 tags: ['angularJs', 'josn', 'format']
 ---
-我们在angularJs的项目中，常常需要对`json`进行显式的查看，以便更清晰的了解到`json`数据内部结构与数值变化：
+我们在angularJs的项目中，常常需要对`json`进行显式的查看，以便更清晰的了解到`json`数据内部结构与数值变化。本文将介绍一种非常不错的方法，来协助你查看前台绑定的`json`数据。
+
 <!-- more -->
 ## 格式化以前
 比如：
