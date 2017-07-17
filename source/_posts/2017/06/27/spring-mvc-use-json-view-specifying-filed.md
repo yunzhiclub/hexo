@@ -21,6 +21,7 @@ public class District implements Serializable{
     @ApiModelProperty("上级区域")
     @ManyToOne
     private District parentDistrict;
+
     @ApiModelProperty("下级区域列表")
     @OneToMany(mappedBy = "parentDistrict")
     @Lazy
@@ -51,6 +52,7 @@ Failed to write HTTP message: org.springframework.http.converter.HttpMessageNotW
 ## 使用@JsonView
 使用`@JsonView`可以对字段输出进行自由的组合
 参考官方文档：[https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-jsonview](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-jsonview)
+
 
 ```java
 @Entity
