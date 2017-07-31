@@ -12,9 +12,9 @@ addons:
 # 运行前设置
 before_script:
   # 安装nodejs
-  - nvm install 0.10
-  - nvm use 0.10
-
+  - nvm install 4.0
+  - nvm use 4.0
+  - rm -rf node_modules/
   # 安装npm软件包
   - npm install
 
@@ -34,7 +34,6 @@ script:
 cache:
   directories:
   - .autoconf
-  - node_modules
 
 # 脚本执行成功后，进入文档文件夹，并强行push到项目的gh-page分支，生成项目文档
 after_success:
