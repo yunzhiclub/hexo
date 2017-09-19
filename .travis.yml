@@ -1,5 +1,7 @@
 # 声明使用语言
-language: 
+language: node_js
+node_js:
+  - 4.0
   
 # 声明使用的服务
 services:
@@ -12,10 +14,10 @@ addons:
 # 运行前设置
 before_script:
   # 安装nodejs
-  - nvm install 4.0
-  - nvm use 4.0
+  #- nvm install 4.0
+  #- nvm use 4.0
   # 安装npm软件包
-  - npm install
+  #- npm install
 
 # 通知方式
 notifications:
