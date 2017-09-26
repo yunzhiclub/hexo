@@ -216,11 +216,8 @@ inverseJoinColumns = {
 ### 授权检定项目实体
 有了前面的经验，下面就很简单了：
 
-<<<<<<< HEAD
+
 ```java
-=======
-```
->>>>>>> master
 public class DeviceInstrument {
     @ManyToMany
     @JoinTable(

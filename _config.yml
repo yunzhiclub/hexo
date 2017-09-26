@@ -7,7 +7,7 @@ title: 梦云智
 subtitle: 一起做着靠谱的事情，这就是我们。
 description: 河北工业大学梦云智软件开发团队日志
 author: 梦云智
-language: zh-cn
+language: zh-Hans
 timezone: Asia/Shanghai
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: material-flow
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

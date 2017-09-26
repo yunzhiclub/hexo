@@ -1,8 +1,12 @@
 ---
 title: FreeBSD中，重新启动并在后台运行jar文件
 date: 2017-06-19 16:06:11
-tags: [freebsd,backgroud,forever]
+tags: 
+- freebsd
+- backgroud
+- forever
 category: teacherPan
+type: "tags"
 ---
 在`freebsd`中，如果我们以`ssh`进行登录，直接启动`jar`文件的话，会发现，当窗口关闭后，运行的程序也被自动终止了。怎么样才能实现当对话关闭后，程序仍将继续运行呢？
 
