@@ -1,7 +1,7 @@
 ---
 title: 在angularJs中，如何将list列表数据绑定到一系列的checkbox中。
 date: 2017-06-24 22:59:50
-tags: [angularJs, checkbox]
+tags: [AngularJS, checkbox]
 category: teacherPan
 ---
 在项目开发中，我们经常会遇到多到多的数据更新操作。比如，在一个用户可以拥有多个角色的系统中，我们需要更新某个用户的角色的操作。
