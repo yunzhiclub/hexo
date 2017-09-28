@@ -2,10 +2,7 @@
 title: 监听指令的外部数据源变化
 date: 2017-06-27 13:57:11
 tags:
-    - angularjs
-    - watch
-    - directive
-    - element
+    - AngularJS
 categories: teacherPan
 ---
 先给一个效果图。其中区域是一个指令，而用户是另一个指令。我们希望当区域为区县级别时，显示用户选择列表。非区域级别时，隐藏用户选择框。

@@ -1,7 +1,7 @@
 ---
 title: 计量项目建立路由的流程
 date: 2017-06-23 21:32:08
-tags: [yoeman,route,angularjs]
+tags: [yeoman,route,AngularJS]
 category: chenyuanyuan
 ---
 通过这一段时间建立路由，明白了项目的整体文件之间的关系。下面以本次项目为例说一下在angularjs中建立路由的流程。

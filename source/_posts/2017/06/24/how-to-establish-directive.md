@@ -1,7 +1,9 @@
 ---
 title: 建立指令的步骤
 date: 2017-06-24 11:40:57
-tags: [yoeman,directive,route,angularjs]
+tags: 
+    - yeoman
+    - AngularJS
 category: chenyuanyuan
 ---
 以本项目为例，写一下建立指令的步骤。

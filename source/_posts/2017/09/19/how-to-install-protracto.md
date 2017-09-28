@@ -1,7 +1,7 @@
 ---
 title: 安装protracto记
 date: 2017-09-19 15:13:34
-tags: ['angularjs', 'protracto']
+tags: ['AngularJS', 'protracto']
 category: teacherPan
 ---
 `protracto`是`angularjs`下的一个`E2E`集成测试工具。所谓集成测试，就是把各个模块开发完，对接好后，一起跑一下系统，然后看各个模块的关联是否有问题。
