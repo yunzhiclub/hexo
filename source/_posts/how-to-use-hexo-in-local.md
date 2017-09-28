@@ -1,6 +1,6 @@
 ---
 title: 如何在本地使用hexo发表文章
-date: 2017-05-31 16:57:35
+date: Thu Sep 28 08:57:14 2017
 tags: hexo
 category: teacherPan
 ---
@@ -25,12 +25,28 @@ clone后，使用命令行，进入所在文件夹。进行`npm`依赖安装：
 $ npm install
 ```
 clone主题
+团队blog的主题在原第三方主题的基础上，进行了个性化的设置。设置后的内容上传到了团队的仓库中，当前团队应用的主题为：hext(具体可以查看根目录下的.travis.yml文件)。
+我们依然在项目的根目录下，执行以下命令。
 ```
-$ git clone --depth=1 https://github.com/mengyunzhi/hexo-theme-material-flow themes/material-flow
+$ git clone --depth=1 https://github.com/mengyunzhi/hexo-theme-next themes/next
 ```
+操作后，你将在`themes`文件夹上得到一个`next`文件夹，结构如下：
+```
+├── source
+│   ├── _posts
+│   ├── categories
+│   ├── images
+│   └── tags
+└── themes
+    └── next
+```
+
 
 # 新建分支
 在项目master分支的基础上，新建自己的分支。
+```
+$ git checkout -b yourBranchName(替换为你分支的名字，比如xiaoming)
+```
 
 # 启动项目
 ```
