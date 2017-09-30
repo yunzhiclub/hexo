@@ -46,10 +46,14 @@ category: teacherPan
 解决方法如下：
 * 进入`nodejs`官网，下载最新版本的`nodejs`并安装.
 * 在使用命令时，使用`sudo webdriver-manager update`（windows权限问题，请`google`解决）
-* 由于我使用了`shadowsocks`做为代理，所以在围绕`shadowsocks`作文章。
+* 由于我使用了`shadowsocks`做为代理，`shadowsocks`仅支持`Socks5`代理方式，但我们的`shell`仅支持`http`,所以我们需要需要解决将`Socks5`转化为`http`的问题。
     * 使用`brew install privoxy`命令，安装了并配置了`privoxy`，将`socks`代理变为`http`代理。
     * 使用`webdriver-manager --help`命令，获取到我可以使用`--proxy`参数来指定代理。
     * 使用`sudo webdriver-manager update --proxy=http://127.0.0.1:8118`来完成了更新操作.
+
+MAC系统安装与配置`privoxy`请参考:`http://www.iosugar.com/2017/02/19/Mac-terminal-environment/`
+大体总结如下：1.安装privoxy 2.配置privoxy 3. 启动privoxy 4.将privoxy设置为开机自启动(在~/user(你的用户名)下，修改`.bash_profile`, 并增加`/usr/local/sbin/privoxy /usr/local/etc/privoxy/config`一行)
+
 
 # 启动webdriver-manager
 同样，我使用了官方的`webdriver-manager start`来尝试启动这个应用。运气不太好，获取了无法执行的错误。`google`查询后，得到了当前路径的`node_modules`中不存在`webdriver-manager`导致出错的原因。观察`package.json`发现，的确未自动写入关于`protracto`。再经过查询，得到以下文章，并主要进行了参考：
@@ -62,7 +66,8 @@ category: teacherPan
 `sudo ./node_modules/protractor/bin/webdriver-manager start`
 服务成功启动。
 
-> 我们将服务窗口最小化(注意：不是关闭)，然后继续操作。
+
+> 我们将服务窗口最小化(注意：不是关闭)，然后继续操作。再次启动时，需要先启动privoxy，再执行以上的update及start
 
 # 写测试文件
 在`test`文件夹中，新建`e2e`文件夹，及`login`文件。
