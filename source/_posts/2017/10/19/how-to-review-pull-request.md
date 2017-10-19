@@ -10,7 +10,9 @@ cagegory: teacherPan
 首先，假设我们有以下`pull request`.
 {% asset_img 1.jpg pullRequest示例 %}
 # 拉取项目
-`git pull`
+```bash
+git pull
+```
 
 # 找到提交分支
 如下图，我们查看到，当前的`pull request`是由`reviewPullRequest`提交上来的。
@@ -19,15 +21,12 @@ cagegory: teacherPan
 # 切换到提交分支
 <hr>
 如果我们正在进行同一项目的开发，那么我们可以先将自己的代码进行`commit`。
-比如，我们使用以下命令
-```bash
-git add ./
-git commit -a -m "temp"
-```
 <hr>
 切换至提交`pull request`的分支`reviewPullRequest`。
 
-`git checkout <reviewPullRequest>`
+```bash
+git checkout <reviewPullRequest>
+```
 
 # 查看效果或是代码
 此时，我们便可以启用本地环境来查看效果了。
@@ -36,4 +35,12 @@ git commit -a -m "temp"
 
 {% asset_img 3.jpg pullRequest示例 %}
 
+代码审阅完毕后，我们需要在`github`中给出审核的意见：
+
+{% asset_img 4.jpg pullRequest示例 %}
+
+三种意见：
+1. Commnet 不同意
+2. Approve 同意
+3. Request changes 修改后同意
 
