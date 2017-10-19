@@ -1,8 +1,8 @@
 ---
 title: 学习JPA的@OneToMany注解
 date: 2017-10-09 15:05:43
-tags:[JPA]
-categories: chuhang
+tags:  [JPA, Hibernate]
+categories:  chuhang
 ---
 
 在JPA中，最常用的关系大概就是一对多了。假设实体A、B的关系为A:B=1:n，通常情况下，我们会在B实体中使用@ManyToOne的注解。但是有时我们需要在A实体中使用@OneToMany的注解，那么我们应该怎么办呢？
