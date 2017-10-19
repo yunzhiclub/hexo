@@ -34,6 +34,6 @@ git commit -a -m "temp"
 
 如果我们查看是`readme.md`文档，那么还可以直接登录`github`官网，然后在官网上直接切换分支后在线阅览`readme.md`的效果。
 
-
+{% asset_img 3.jpg pullRequest示例 %}
 
 
