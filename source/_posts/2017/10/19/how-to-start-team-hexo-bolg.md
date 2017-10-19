@@ -37,3 +37,6 @@ INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
 
 最后，编辑文章，保存，将新的文章添加到git中，并提交`pull request`
 
+# 参考文档
+![https://hexo.io/zh-cn/docs/](https://hexo.io/zh-cn/docs/)
+
