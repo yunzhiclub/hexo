@@ -1,0 +1,23 @@
+{
+  "name": "www.mengyunzhi.cn",
+  "description": "blog of mengyunzhi team.",
+  "main": "",
+  "authors": [
+    "潘杰 <panjie@yunzhiclub.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/yunzhiclub/hexo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "jquery": ">=1.2.2"
+  },
+  "dependencies": {
+    "next": "git://github.com/mengyunzhi/hexo-theme-next#^6.0.0"
+  }
+}
