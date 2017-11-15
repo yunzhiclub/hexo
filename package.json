@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "3.3.9"
+    "version": "3.4.1"
   },
   "dependencies": {
     "bower": "^1.8.2",
-    "hexo": "^3.3.9",
+    "hexo": "^3.4.1",
     "hexo-autoprefixer": "^1.0.0",
     "hexo-generator-archive": "^0.1.4",
     "hexo-generator-category": "^0.1.3",
