@@ -7,6 +7,8 @@ categories: chuhang
 
 java中，一旦程序定义了数组的长度，就不能修改这个数组的长度了。如果我们需要修改数组的长度，我们可以使用ArrayList，以达到改变数组长度的目的。
 
+<!--more--->
+
 ## 类ArrayList
 ArrayList的缺点：
 + ArrayList比数组的效率低
