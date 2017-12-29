@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>php + xdebug + phpstrom断点调试 | 梦云智</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我们说sublime和xdebug调试php程序的时候数组变量有的时候不能显示完全，所以就给我们调试程序带来了不方便，如果使用var_dump又太浪费时间（可能是因为本人技术水平不佳）。">
+<meta name="keywords" content="php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php + xdebug + phpstrom断点调试">
+<meta property="og:url" content="http://www.mengyunzhi.cn/2017/09/18/php-xdebug-phpstorm/index.html">
+<meta property="og:site_name" content="梦云智">
+<meta property="og:description" content="我们说sublime和xdebug调试php程序的时候数组变量有的时候不能显示完全，所以就给我们调试程序带来了不方便，如果使用var_dump又太浪费时间（可能是因为本人技术水平不佳）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.mengyunzhi.cn/2017/09/18/php-xdebug-phpstorm/phpinfo.png">
+<meta property="og:image" content="http://www.mengyunzhi.cn/2017/09/18/php-xdebug-phpstorm/xdebug.png">
+<meta property="og:image" content="http://www.mengyunzhi.cn/2017/09/18/php-xdebug-phpstorm/xdebug_helper.png">
+<meta property="og:image" content="http://www.mengyunzhi.cn/2017/09/18/php-xdebug-phpstorm/xdebug_start.gif">
+<meta property="og:image" content="http://www.mengyunzhi.cn/2017/09/18/php-xdebug-phpstorm/break_point.png">
+<meta property="og:updated_time" content="2017-12-29T06:58:04.812Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php + xdebug + phpstrom断点调试">
+<meta name="twitter:description" content="我们说sublime和xdebug调试php程序的时候数组变量有的时候不能显示完全，所以就给我们调试程序带来了不方便，如果使用var_dump又太浪费时间（可能是因为本人技术水平不佳）。">
+<meta name="twitter:image" content="http://www.mengyunzhi.cn/2017/09/18/php-xdebug-phpstorm/phpinfo.png">
+  
+    <link rel="alternate" href="/atom.xml" title="梦云智" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦云智</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起做着靠谱的事情，这就是我们。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">最新文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.mengyunzhi.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-php-xdebug-phpstorm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/18/php-xdebug-phpstorm/" class="article-date">
+  <time datetime="2017-09-18T07:57:43.000Z" itemprop="datePublished">2017-09-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/gaoliming/">gaoliming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      php + xdebug + phpstrom断点调试
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们说<code>sublime</code>和<code>xdebug</code>调试php程序的时候数组变量有的时候不能显示完全，所以就给我们调试程序带来了不方便，如果使用<code>var_dump</code>又太浪费时间（可能是因为本人技术水平不佳）。</p>
+<a id="more"></a>
+<p><strong>环境</strong>: Ubuntu16.04, lampp, phpStorm</p>
+<h2 id="download-xdebug"><a href="#download-xdebug" class="headerlink" title="download xdebug"></a>download xdebug</h2><p>我们可以新建一个php文件，然后写上:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phpinfo();</span><br></pre></td></tr></table></figure></p>
+<p>来查看自己安装php的具体信息，以方便我们找到合适自己的<code>xdebug</code><br><img src="/2017/09/18/php-xdebug-phpstorm/phpinfo.png" alt=""> </p>
+<p>然后我们打开网址<a href="https://xdebug.org/wizard.php" target="_blank" rel="noopener">https://xdebug.org/wizard.php</a> <code>Ctrl + A</code>全选将自己的php信息输入到空白页面。<br>点击<strong>Analyse my phpinfo() output</strong></p>
+<p>然后<code>xdebug</code>官网就会推荐合适xdebug版本而且给出详尽的安装步骤。</p>
+<h2 id="install-xdebug"><a href="#install-xdebug" class="headerlink" title="install xdebug"></a>install xdebug</h2><p>下面的步骤因为个人安装路径的不同而不同，不用担心，因为<code>xdebug</code>官网分析的已经非常到位了，只要能简单读懂英语相信都可以安装成功。</p>
+<h3 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -xvzf xdebug-2.5.4.tgz</span><br><span class="line">cd xdebug-2.5.4/</span><br><span class="line">phpize</span><br></pre></td></tr></table></figure>
+<p>然后我们会发现提示以下错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">程序“phpize”尚未安装。 您可以使用以下命令安装：</span><br><span class="line">sudo apt install php7.0-dev</span><br></pre></td></tr></table></figure>
+<h3 id="install-php7-0-dev"><a href="#install-php7-0-dev" class="headerlink" title="install php7.0-dev"></a>install php7.0-dev</h3><p>我们安装提示继续进行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install php7.0-dev</span><br><span class="line">sudo phpize</span><br><span class="line">sudo ./configure</span><br><span class="line">sudo make</span><br><span class="line">sudo cp modules/xdebug.so /opt/lampp/lib/php/extensions/no-debug-non-zts-20151012</span><br></pre></td></tr></table></figure>
+<h3 id="编辑php-ini"><a href="#编辑php-ini" class="headerlink" title="编辑php.ini"></a>编辑php.ini</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /opt/lampp/etc/php.ini</span><br></pre></td></tr></table></figure>
+<p>最后一行添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">zend_extension = /opt/lampp/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so</span><br><span class="line">//调试信息代码使用</span><br><span class="line">xdebug.remote_host = 127.0.0.1</span><br><span class="line">xdebug.remote_enable = 1</span><br><span class="line">xdebug.remote_port = 9000</span><br><span class="line">xdebug.remote_handler = dbgp</span><br><span class="line">xdebug.remote_mode = req</span><br></pre></td></tr></table></figure>
+<h3 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /opt/lampp/lampp restart</span><br></pre></td></tr></table></figure>
+<p>然后我们重复第一步查看自己的php信息发现<code>xdebug</code>安装成功<br><img src="/2017/09/18/php-xdebug-phpstorm/xdebug.png" alt=""> </p>
+<h2 id="install-Xdebug-extension-helper"><a href="#install-Xdebug-extension-helper" class="headerlink" title="install Xdebug extension helper"></a>install Xdebug extension helper</h2><h3 id="google-chrome"><a href="#google-chrome" class="headerlink" title="google chrome"></a>google chrome</h3><p>插件安装地址<br><a href="https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?hl=en" target="_blank" rel="noopener">https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?hl=en </a> </p>
+<p>因为<code>google</code>被墙了，如果想要安装所以请自行在<code>github</code> or <code>老D</code>上下载<code>hosts</code>。</p>
+<h3 id="IDEKey"><a href="#IDEKey" class="headerlink" title="IDEKey"></a>IDEKey</h3><p>在<code>Xdebug extension helper</code>的<code>选项</code> 中 <code>IDE key</code>   中选择<code>phpStorm</code>。<br><img src="/2017/09/18/php-xdebug-phpstorm/xdebug_helper.png" alt=""> </p>
+<p>开启<code>Xdebug extension helper</code>调试模式<br><img src="/2017/09/18/php-xdebug-phpstorm/xdebug_start.gif" alt=""> </p>
+<h2 id="配置PhpStorm"><a href="#配置PhpStorm" class="headerlink" title="配置PhpStorm"></a>配置PhpStorm</h2><p>然后我们打开phpStorm中<code>Run</code> , <code>Start Listening for PHP Debug Connections.</code><br>然后我们就可以调试了:<br><img src="/2017/09/18/php-xdebug-phpstorm/break_point.png" alt=""> </p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://blog.csdn.net/dm_vincent/article/details/44678347" target="_blank" rel="noopener">[PHP+xdebug] 在Ubuntu 14.04下的PhpStorm中配置xdebug调试环境</a><br><a href="https://confluence.jetbrains.com/display/PhpStorm/Zero-configuration+Web+Application+Debugging+with+Xdebug+and+PhpStorm" target="_blank" rel="noopener">Zero-configuration Web Application Debugging with Xdebug and PhpStorm</a> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.mengyunzhi.cn/2017/09/18/php-xdebug-phpstorm/" data-id="cjbrki35g00215ii7ep9y8nvp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/19/how-to-install-protracto/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          安装protracto记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/23/how-to-sub-two-sql-date/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">两个sql.Date日期相减的方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/chenyuanyuan/">chenyuanyuan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/chuhang/">chuhang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/gaoliming/">gaoliming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/liuxi/">liuxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/panjie/">panjie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/teacherPan/">teacherPan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/zhangjiahao/">zhangjiahao</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">@JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ManyToMany/">@ManyToMany</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bower/">Bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PagingAndSortingRepository/">PagingAndSortingRepository</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/">Spring MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularJs/">angularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/automation-documents/">automation documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backgroud/">backgroud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cascade/">cascade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-binding/">data binding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/">documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forever/">forever</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/format/">format</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gateway/">gateway</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-application/">java application</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/josn/">josn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageable/">pageable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protracto/">protracto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-Date/">sql.Date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/">translation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tute/">tute</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yeoman/">yeoman</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JsonView/" style="font-size: 10px;">@JsonView</a> <a href="/tags/ManyToMany/" style="font-size: 10px;">@ManyToMany</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/AngularJS/" style="font-size: 20px;">AngularJS</a> <a href="/tags/Bower/" style="font-size: 10px;">Bower</a> <a href="/tags/Hibernate/" style="font-size: 12.5px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 17.5px;">JPA</a> <a href="/tags/JsonView/" style="font-size: 10px;">JsonView</a> <a href="/tags/PagingAndSortingRepository/" style="font-size: 10px;">PagingAndSortingRepository</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/SpringMVC/" style="font-size: 15px;">SpringMVC</a> <a href="/tags/SpringMvc/" style="font-size: 12.5px;">SpringMvc</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/angularJs/" style="font-size: 10px;">angularJs</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/automation-documents/" style="font-size: 10px;">automation documents</a> <a href="/tags/backgroud/" style="font-size: 10px;">backgroud</a> <a href="/tags/cascade/" style="font-size: 10px;">cascade</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/data-binding/" style="font-size: 10px;">data binding</a> <a href="/tags/documents/" style="font-size: 10px;">documents</a> <a href="/tags/forever/" style="font-size: 10px;">forever</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/freebsd/" style="font-size: 15px;">freebsd</a> <a href="/tags/gateway/" style="font-size: 10px;">gateway</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/java-application/" style="font-size: 10px;">java application</a> <a href="/tags/josn/" style="font-size: 10px;">josn</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/macos/" style="font-size: 10px;">macos</a> <a href="/tags/maven/" style="font-size: 12.5px;">maven</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/pageable/" style="font-size: 10px;">pageable</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/protracto/" style="font-size: 10px;">protracto</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring boot</a> <a href="/tags/spring-mvc/" style="font-size: 12.5px;">spring mvc</a> <a href="/tags/sql-Date/" style="font-size: 10px;">sql.Date</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/tute/" style="font-size: 10px;">tute</a> <a href="/tags/yeoman/" style="font-size: 12.5px;">yeoman</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/29/how-to-start-measurement-project/">如何启动测量项目</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/22/instrument-audit/">计量项目前台部分Controller之间的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/20/java-exception-handling/">java-exception-handling</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/java-dynamic-data-structure/">ArrayList、LinkedList和HashSet的学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 梦云智<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">最新文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

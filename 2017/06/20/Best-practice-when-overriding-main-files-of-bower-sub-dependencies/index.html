@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>复写Bower.json文件比较好的方法 | 梦云智</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Override Bower Packages当我用 bower install 下载一个github上的 bower package时，下载完成之后，它自己带的bower.json文件里面并没有 “main”: “angular-locale_zh-cn.js”这种使得我们启动 grunt项目 来帮我们直接执行添加依赖的代码。 当然，我们自己可以在自己本地的bower.json文件中添加 这行语">
+<meta name="keywords" content="Bower">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复写Bower.json文件比较好的方法">
+<meta property="og:url" content="http://www.mengyunzhi.cn/2017/06/20/Best-practice-when-overriding-main-files-of-bower-sub-dependencies/index.html">
+<meta property="og:site_name" content="梦云智">
+<meta property="og:description" content="Override Bower Packages当我用 bower install 下载一个github上的 bower package时，下载完成之后，它自己带的bower.json文件里面并没有 “main”: “angular-locale_zh-cn.js”这种使得我们启动 grunt项目 来帮我们直接执行添加依赖的代码。 当然，我们自己可以在自己本地的bower.json文件中添加 这行语">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.mengyunzhi.cn/images/Override%20Bower.json.png">
+<meta property="og:updated_time" content="2017-12-29T06:58:04.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="复写Bower.json文件比较好的方法">
+<meta name="twitter:description" content="Override Bower Packages当我用 bower install 下载一个github上的 bower package时，下载完成之后，它自己带的bower.json文件里面并没有 “main”: “angular-locale_zh-cn.js”这种使得我们启动 grunt项目 来帮我们直接执行添加依赖的代码。 当然，我们自己可以在自己本地的bower.json文件中添加 这行语">
+<meta name="twitter:image" content="http://www.mengyunzhi.cn/images/Override%20Bower.json.png">
+  
+    <link rel="alternate" href="/atom.xml" title="梦云智" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦云智</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起做着靠谱的事情，这就是我们。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">最新文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.mengyunzhi.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Best-practice-when-overriding-main-files-of-bower-sub-dependencies" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/20/Best-practice-when-overriding-main-files-of-bower-sub-dependencies/" class="article-date">
+  <time datetime="2017-06-20T12:26:29.000Z" itemprop="datePublished">2017-06-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/liuxi/">liuxi</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      复写Bower.json文件比较好的方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Override-Bower-Packages"><a href="#Override-Bower-Packages" class="headerlink" title="Override Bower Packages"></a>Override Bower Packages</h2><p>当我用 bower install 下载一个github上的 bower package时，下载完成之后，它自己带的bower.json文件里面并没有 “main”: “angular-locale_zh-cn.js”这种使得我们启动 grunt项目 来帮我们直接执行添加依赖的代码。 当然，我们自己可以在自己本地的bower.json文件中添加 这行语句，这样我们在本地可以 在执行grunt server 的时候，可以在我们设置的index.html文件中自动引入 angular-locale_zh-cn.js这个文件。 但是问题来了，我们下载的bower_components 文件是被在我们项目里面 ignore的，因此并不能同步到我们 所在的github项目中，对此我们得找出解决方案。</p>
+<p>我们在启动项目的时候会自动 执行项目目录下的bower.json 文件，我们可以在项目的bower.json文件中直接复写 我们下载的本地的 bower.json文件。示例：</p>
+<p><img src="/images/Override Bower.json.png" alt=""></p>
+<p>这样，我们就可以 在启动项目 的时候 自动引入我们下载好的angular-locale_zh-cn.js文件。</p>
+<p>当然，这个同样适用于 我们bower所下载的包里面的 bower.json文件中含有”main”的代码的情况，例如我们上图中给出的bootstrap，我们直接在项目的 bower.json文件中 复写就可以了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.mengyunzhi.cn/2017/06/20/Best-practice-when-overriding-main-files-of-bower-sub-dependencies/" data-id="cjbrki33700095ii7iruqms8m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bower/">Bower</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/22/binding-json-data-to-two-entity/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spring MVC 绑定json数据到多个实体上
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/20/how-to-build-springmvc-application/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">how to build SpringMVC application</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/chenyuanyuan/">chenyuanyuan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/chuhang/">chuhang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/gaoliming/">gaoliming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/liuxi/">liuxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/panjie/">panjie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/teacherPan/">teacherPan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/zhangjiahao/">zhangjiahao</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">@JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ManyToMany/">@ManyToMany</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bower/">Bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PagingAndSortingRepository/">PagingAndSortingRepository</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/">Spring MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularJs/">angularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/automation-documents/">automation documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backgroud/">backgroud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cascade/">cascade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-binding/">data binding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/">documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forever/">forever</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/format/">format</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gateway/">gateway</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-application/">java application</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/josn/">josn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageable/">pageable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protracto/">protracto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-Date/">sql.Date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/">translation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tute/">tute</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yeoman/">yeoman</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JsonView/" style="font-size: 10px;">@JsonView</a> <a href="/tags/ManyToMany/" style="font-size: 10px;">@ManyToMany</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/AngularJS/" style="font-size: 20px;">AngularJS</a> <a href="/tags/Bower/" style="font-size: 10px;">Bower</a> <a href="/tags/Hibernate/" style="font-size: 12.5px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 17.5px;">JPA</a> <a href="/tags/JsonView/" style="font-size: 10px;">JsonView</a> <a href="/tags/PagingAndSortingRepository/" style="font-size: 10px;">PagingAndSortingRepository</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/SpringMVC/" style="font-size: 15px;">SpringMVC</a> <a href="/tags/SpringMvc/" style="font-size: 12.5px;">SpringMvc</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/angularJs/" style="font-size: 10px;">angularJs</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/automation-documents/" style="font-size: 10px;">automation documents</a> <a href="/tags/backgroud/" style="font-size: 10px;">backgroud</a> <a href="/tags/cascade/" style="font-size: 10px;">cascade</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/data-binding/" style="font-size: 10px;">data binding</a> <a href="/tags/documents/" style="font-size: 10px;">documents</a> <a href="/tags/forever/" style="font-size: 10px;">forever</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/freebsd/" style="font-size: 15px;">freebsd</a> <a href="/tags/gateway/" style="font-size: 10px;">gateway</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/java-application/" style="font-size: 10px;">java application</a> <a href="/tags/josn/" style="font-size: 10px;">josn</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/macos/" style="font-size: 10px;">macos</a> <a href="/tags/maven/" style="font-size: 12.5px;">maven</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/pageable/" style="font-size: 10px;">pageable</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/protracto/" style="font-size: 10px;">protracto</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring boot</a> <a href="/tags/spring-mvc/" style="font-size: 12.5px;">spring mvc</a> <a href="/tags/sql-Date/" style="font-size: 10px;">sql.Date</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/tute/" style="font-size: 10px;">tute</a> <a href="/tags/yeoman/" style="font-size: 12.5px;">yeoman</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/29/how-to-start-measurement-project/">如何启动测量项目</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/22/instrument-audit/">计量项目前台部分Controller之间的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/20/java-exception-handling/">java-exception-handling</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/java-dynamic-data-structure/">ArrayList、LinkedList和HashSet的学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 梦云智<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">最新文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

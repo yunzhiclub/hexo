@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>安装protracto记 | 梦云智</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="protracto是angularjs下的一个E2E集成测试工具。所谓集成测试，就是把各个模块开发完，对接好后，一起跑一下系统，然后看各个模块的关联是否有问题。 我们在项目中，往往通过手工点击的方法来完成集成测试。由于每个人对项目的理解都不一致，加之每次测试的状态及我们所处的环境不同。导致了前后可能测试了100次，但却使用了100次不同的测试步骤。 有了集成测试工具，我们只需要把相关点击和输入的操">
+<meta name="keywords" content="AngularJS,protracto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装protracto记">
+<meta property="og:url" content="http://www.mengyunzhi.cn/2017/09/19/how-to-install-protracto/index.html">
+<meta property="og:site_name" content="梦云智">
+<meta property="og:description" content="protracto是angularjs下的一个E2E集成测试工具。所谓集成测试，就是把各个模块开发完，对接好后，一起跑一下系统，然后看各个模块的关联是否有问题。 我们在项目中，往往通过手工点击的方法来完成集成测试。由于每个人对项目的理解都不一致，加之每次测试的状态及我们所处的环境不同。导致了前后可能测试了100次，但却使用了100次不同的测试步骤。 有了集成测试工具，我们只需要把相关点击和输入的操">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.mengyunzhi.cn/2017/09/19/how-to-install-protracto/1.png">
+<meta property="og:image" content="http://www.mengyunzhi.cn/2017/09/19/how-to-install-protracto/1.gif">
+<meta property="og:updated_time" content="2017-12-29T06:58:04.816Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装protracto记">
+<meta name="twitter:description" content="protracto是angularjs下的一个E2E集成测试工具。所谓集成测试，就是把各个模块开发完，对接好后，一起跑一下系统，然后看各个模块的关联是否有问题。 我们在项目中，往往通过手工点击的方法来完成集成测试。由于每个人对项目的理解都不一致，加之每次测试的状态及我们所处的环境不同。导致了前后可能测试了100次，但却使用了100次不同的测试步骤。 有了集成测试工具，我们只需要把相关点击和输入的操">
+<meta name="twitter:image" content="http://www.mengyunzhi.cn/2017/09/19/how-to-install-protracto/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="梦云智" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦云智</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起做着靠谱的事情，这就是我们。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">最新文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.mengyunzhi.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-how-to-install-protracto" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/19/how-to-install-protracto/" class="article-date">
+  <time datetime="2017-09-19T07:13:34.000Z" itemprop="datePublished">2017-09-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/teacherPan/">teacherPan</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      安装protracto记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>protracto</code>是<code>angularjs</code>下的一个<code>E2E</code>集成测试工具。所谓集成测试，就是把各个模块开发完，对接好后，一起跑一下系统，然后看各个模块的关联是否有问题。</p>
+<p>我们在项目中，往往通过手工点击的方法来完成集成测试。由于每个人对项目的理解都不一致，加之每次测试的状态及我们所处的环境不同。导致了前后可能测试了100次，但却使用了100次不同的测试步骤。</p>
+<p>有了集成测试工具，我们只需要把相关点击和输入的操作放在代码中，然后看着浏览器自动为我们执行操作就可以了。</p>
+<p>我们还可以像单元测试一样，写一些断言。当测试跑完，系统会自动告诉我们哪些测试没有通过，期待的值是什么，又实际返回了什么值。</p>
+<a id="more"></a>
+<h1 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h1><p>我进行安装前，首先，我找到了官方文档：<br><a href="http://www.protractortest.org/#/tutorial" target="_blank" rel="noopener">http://www.protractortest.org/#/tutorial</a></p>
+<p>然后就是按照官方文档的步骤进行安装。<br>官方文档的介绍，大体分为以下几步。</p>
+<ol>
+<li>安装protractor</li>
+<li>升级webdriver-manager</li>
+<li>启动webdriver-manager</li>
+<li>写测试文件</li>
+<li>写配置文件</li>
+<li>运行第一个测试</li>
+<li>完善测试</li>
+</ol>
+<p>首先，我们先进入<code>angularjs</code>的项目根目录，比如<code>webApp</code>。</p>
+<h1 id="安装protractor"><a href="#安装protractor" class="headerlink" title="安装protractor"></a>安装protractor</h1><p>安装protractor，我们需要使用命令：<br><code>npm install -g protractor</code><br>这代码着，<code>protractor</code>依赖于<code>nodejs</code>.</p>
+<h1 id="升级webdriver-manager"><a href="#升级webdriver-manager" class="headerlink" title="升级webdriver-manager"></a>升级webdriver-manager</h1><p>使用命令：<br><code>webdriver-manager update</code></p>
+<p>实际的安装中，我遇到了以下问题：</p>
+<ul>
+<li><code>nodejs</code>版本较低，导致输入上述命令时，提示语法错误（高版本新的语法，低版本的<code>nodejs</code>不支持）</li>
+<li>提示发生了<code>access</code>权限问题</li>
+<li>在线更新包时，发生了超时连接的错误</li>
+</ul>
+<p>解决方法如下：</p>
+<ul>
+<li>进入<code>nodejs</code>官网，下载最新版本的<code>nodejs</code>并安装.</li>
+<li>在使用命令时，使用<code>sudo webdriver-manager update</code>（windows权限问题，请<code>google</code>解决）</li>
+<li>由于我使用了<code>shadowsocks</code>做为代理，<code>shadowsocks</code>仅支持<code>Socks5</code>代理方式，但我们的<code>shell</code>仅支持<code>http</code>,所以我们需要需要解决将<code>Socks5</code>转化为<code>http</code>的问题。<ul>
+<li>使用<code>brew install privoxy</code>命令，安装了并配置了<code>privoxy</code>，将<code>socks</code>代理变为<code>http</code>代理。</li>
+<li>使用<code>webdriver-manager --help</code>命令，获取到我可以使用<code>--proxy</code>参数来指定代理。</li>
+<li>使用<code>sudo webdriver-manager update --proxy=http://127.0.0.1:8118</code>来完成了更新操作.</li>
+</ul>
+</li>
+</ul>
+<p>MAC系统安装与配置<code>privoxy</code>请参考:<code>http://www.iosugar.com/2017/02/19/Mac-terminal-environment/</code><br>大体总结如下：1.安装privoxy 2.配置privoxy 3. 启动privoxy 4.将privoxy设置为开机自启动(在~/user(你的用户名)下，修改<code>.bash_profile</code>, 并增加<code>/usr/local/sbin/privoxy /usr/local/etc/privoxy/config</code>一行)</p>
+<h1 id="启动webdriver-manager"><a href="#启动webdriver-manager" class="headerlink" title="启动webdriver-manager"></a>启动webdriver-manager</h1><p>同样，我使用了官方的<code>webdriver-manager start</code>来尝试启动这个应用。运气不太好，获取了无法执行的错误。<code>google</code>查询后，得到了当前路径的<code>node_modules</code>中不存在<code>webdriver-manager</code>导致出错的原因。观察<code>package.json</code>发现，的确未自动写入关于<code>protracto</code>。再经过查询，得到以下文章，并主要进行了参考：</p>
+<p><a href="http://thejackalofjavascript.com/end-to-end-testing-with-protractor/" target="_blank" rel="noopener">http://thejackalofjavascript.com/end-to-end-testing-with-protractor/</a></p>
+<p>略过前面安装<code>yoman</code>的部分，分别执行以下语句：<br><code>npm i protractor --save-dev</code><br><code>sudo ./node_modules/protractor/bin/webdriver-manager update --proxy=http://127.0.0.1:8118</code><br><code>sudo ./node_modules/protractor/bin/webdriver-manager start</code><br>服务成功启动。</p>
+<blockquote>
+<p>我们将服务窗口最小化(注意：不是关闭)，然后继续操作。再次启动时，需要先启动privoxy，再执行以上的update及start</p>
+</blockquote>
+<h1 id="写测试文件"><a href="#写测试文件" class="headerlink" title="写测试文件"></a>写测试文件</h1><p>在<code>test</code>文件夹中，新建<code>e2e</code>文件夹，及<code>login</code>文件。</p>
+<img src="/2017/09/19/how-to-install-protracto/1.png" title="新建文件">
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">'Protractor Demo App'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  it(<span class="string">'should have a title'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    browser.get(<span class="string">''</span>);        <span class="comment">// 打开根地址（相对于配置文件的baseUrl）</span></span><br><span class="line">    expect(browser.getTitle()).toEqual(<span class="string">'计量器具管理平台'</span>); <span class="comment">// 断言标题</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="写配置文件"><a href="#写配置文件" class="headerlink" title="写配置文件"></a>写配置文件</h1><p>在根目录中，我们建立<code>protractor-e2e.js</code>，并加入以下配置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">exports.config = &#123;</span><br><span class="line">    <span class="comment">// 运行所有的脚本的最长时间</span></span><br><span class="line">    allScriptsTimeout: <span class="number">99999</span>,</span><br><span class="line">    <span class="comment">// The address of a running selenium server.前面，我们使用start命令启动的服务地址</span></span><br><span class="line">    seleniumAddress: <span class="string">'http://localhost:4444/wd/hub'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Capabilities to be passed to the webdriver instance. 测试兼容性的浏览器设置</span></span><br><span class="line">    capabilities: &#123;</span><br><span class="line">        <span class="string">'browserName'</span>: <span class="string">'chrome'</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 项目地址</span></span><br><span class="line">    baseUrl: <span class="string">'http://localhost:9000/'</span>,</span><br><span class="line"></span><br><span class="line">    framework: <span class="string">'jasmine'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Spec patterns are relative to the current working directly when</span></span><br><span class="line">    <span class="comment">// protractor is called.</span></span><br><span class="line">    <span class="comment">// 测试文件所在位置（使用的是表达式）</span></span><br><span class="line">    specs: [<span class="string">'test/e2e/*.js'</span>],</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Options to be passed to Jasmine-node.</span></span><br><span class="line">    <span class="comment">// 其它选项</span></span><br><span class="line">    jasmineNodeOpts: &#123;</span><br><span class="line">        showColors: <span class="literal">true</span>,</span><br><span class="line">        defaultTimeoutInterval: <span class="number">30000</span>,</span><br><span class="line">        isVerbose: <span class="literal">true</span>,</span><br><span class="line">        includeStackTrace: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h1 id="运行第一个测试"><a href="#运行第一个测试" class="headerlink" title="运行第一个测试"></a>运行第一个测试</h1><p><code>./node_modules/protractor/bin/protractor protractor-e2e.js</code><br>此时，浏览器当自动当前我们测试文件中设置的地址，然后获取标题信息，并进行断言。</p>
+<h1 id="完善测试"><a href="#完善测试" class="headerlink" title="完善测试"></a>完善测试</h1><p>继续完善login.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* https://github.com/angular/protractor/blob/master/docs/getting-started.md */</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">'my app'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    browser.ignoreSynchronization = <span class="literal">true</span>;</span><br><span class="line">    browser.waitForAngular();</span><br><span class="line"></span><br><span class="line">    beforeEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        browser.get(<span class="string">''</span>);    <span class="comment">// 每次测试前，都先尝试打开根目录</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    it(<span class="string">'自动跳转至用户登录界面'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        expect(browser.getTitle()).toEqual(<span class="string">'计量器具管理平台'</span>); <span class="comment">// 获取并断言标题</span></span><br><span class="line">        <span class="comment">// 获取当前的url信息，并断言必然跳转至/login</span></span><br><span class="line">        browser.driver.getCurrentUrl().then(<span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123; </span><br><span class="line">            <span class="keyword">var</span> absUrl = url.split(<span class="string">'#!'</span>);</span><br><span class="line">            expect(absUrl[<span class="number">1</span>]).toEqual(<span class="string">'/login'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    it(<span class="string">'正确的用户名密码进行登录'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 获取username password和登录按钮</span></span><br><span class="line">        <span class="keyword">var</span> username = element(by.model(<span class="string">'user.username'</span>));</span><br><span class="line">        <span class="keyword">var</span> password = element(by.model(<span class="string">'user.password'</span>));</span><br><span class="line">        <span class="keyword">var</span> login = element(by.partialButtonText(<span class="string">'登'</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 自动输入用户名和密码</span></span><br><span class="line">        username.sendKeys(<span class="string">'admin'</span>);</span><br><span class="line">        password.sendKeys(<span class="string">'admin'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前击登录</span></span><br><span class="line">        login.click();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 延迟3秒等待系统完成登录</span></span><br><span class="line">        browser.driver.sleep(<span class="number">3000</span>);</span><br><span class="line">        browser.waitForAngular();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取当前地址为首页的仪表台地址</span></span><br><span class="line">        browser.driver.getCurrentUrl().then(<span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> absUrl = url.split(<span class="string">'#!'</span>);</span><br><span class="line">            expect(absUrl[<span class="number">1</span>]).toEqual(<span class="string">'/main/dashboard'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(url);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>重新启动测试，效果如下图：</p>
+<img src="/2017/09/19/how-to-install-protracto/1.gif" title="新建文件">
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>安装环境是一项具有挑战性的工作。它能够考验自己对工具掌握及理解的情况。如果我们在安装环境中碰到了问题，要尝试着去翻译各种提示的英文文字，然后借助<code>google</code>去找到问题的原因及解决方案。</p>
+<p>注：安装顺利.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.mengyunzhi.cn/2017/09/19/how-to-install-protracto/" data-id="cjbrki35k00245ii76o1255kw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protracto/">protracto</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/22/localhost-pc-phone/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          旅游项目如何实现手机预览
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/18/php-xdebug-phpstorm/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">php + xdebug + phpstrom断点调试</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/chenyuanyuan/">chenyuanyuan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/chuhang/">chuhang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/gaoliming/">gaoliming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/liuxi/">liuxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/panjie/">panjie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/teacherPan/">teacherPan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/zhangjiahao/">zhangjiahao</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">@JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ManyToMany/">@ManyToMany</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bower/">Bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PagingAndSortingRepository/">PagingAndSortingRepository</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/">Spring MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularJs/">angularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/automation-documents/">automation documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backgroud/">backgroud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cascade/">cascade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-binding/">data binding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/">documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forever/">forever</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/format/">format</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gateway/">gateway</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-application/">java application</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/josn/">josn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageable/">pageable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protracto/">protracto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-Date/">sql.Date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/">translation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tute/">tute</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yeoman/">yeoman</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JsonView/" style="font-size: 10px;">@JsonView</a> <a href="/tags/ManyToMany/" style="font-size: 10px;">@ManyToMany</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/AngularJS/" style="font-size: 20px;">AngularJS</a> <a href="/tags/Bower/" style="font-size: 10px;">Bower</a> <a href="/tags/Hibernate/" style="font-size: 12.5px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 17.5px;">JPA</a> <a href="/tags/JsonView/" style="font-size: 10px;">JsonView</a> <a href="/tags/PagingAndSortingRepository/" style="font-size: 10px;">PagingAndSortingRepository</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/SpringMVC/" style="font-size: 15px;">SpringMVC</a> <a href="/tags/SpringMvc/" style="font-size: 12.5px;">SpringMvc</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/angularJs/" style="font-size: 10px;">angularJs</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/automation-documents/" style="font-size: 10px;">automation documents</a> <a href="/tags/backgroud/" style="font-size: 10px;">backgroud</a> <a href="/tags/cascade/" style="font-size: 10px;">cascade</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/data-binding/" style="font-size: 10px;">data binding</a> <a href="/tags/documents/" style="font-size: 10px;">documents</a> <a href="/tags/forever/" style="font-size: 10px;">forever</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/freebsd/" style="font-size: 15px;">freebsd</a> <a href="/tags/gateway/" style="font-size: 10px;">gateway</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/java-application/" style="font-size: 10px;">java application</a> <a href="/tags/josn/" style="font-size: 10px;">josn</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/macos/" style="font-size: 10px;">macos</a> <a href="/tags/maven/" style="font-size: 12.5px;">maven</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/pageable/" style="font-size: 10px;">pageable</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/protracto/" style="font-size: 10px;">protracto</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring boot</a> <a href="/tags/spring-mvc/" style="font-size: 12.5px;">spring mvc</a> <a href="/tags/sql-Date/" style="font-size: 10px;">sql.Date</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/tute/" style="font-size: 10px;">tute</a> <a href="/tags/yeoman/" style="font-size: 12.5px;">yeoman</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/29/how-to-start-measurement-project/">如何启动测量项目</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/22/instrument-audit/">计量项目前台部分Controller之间的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/20/java-exception-handling/">java-exception-handling</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/java-dynamic-data-structure/">ArrayList、LinkedList和HashSet的学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 梦云智<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">最新文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

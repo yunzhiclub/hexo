@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C层自动化文档生成过程 | 梦云智</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题描述在前后台完全分离的项目中，前后台完成对接主要依据是开发文档，为了保证开发效率，我们引入了自动生成文档的注解，那么它是怎么工作的呢？另外在C层的测试类下，我们需要在文档中生成包含响应信息以及请求信息的文档，那么它们又是如何生成的呢？下面我们以部门类型（DepartmentType）的C层为例，说一下自动化文档生成的过程。">
+<meta name="keywords" content="automation documents">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C层自动化文档生成过程">
+<meta property="og:url" content="http://www.mengyunzhi.cn/2017/06/23/how-to-generate-auotomation-documents/index.html">
+<meta property="og:site_name" content="梦云智">
+<meta property="og:description" content="问题描述在前后台完全分离的项目中，前后台完成对接主要依据是开发文档，为了保证开发效率，我们引入了自动生成文档的注解，那么它是怎么工作的呢？另外在C层的测试类下，我们需要在文档中生成包含响应信息以及请求信息的文档，那么它们又是如何生成的呢？下面我们以部门类型（DepartmentType）的C层为例，说一下自动化文档生成的过程。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.mengyunzhi.cn/images/tags.png">
+<meta property="og:image" content="http://www.mengyunzhi.cn/images/all.png">
+<meta property="og:updated_time" content="2017-12-29T06:58:04.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C层自动化文档生成过程">
+<meta name="twitter:description" content="问题描述在前后台完全分离的项目中，前后台完成对接主要依据是开发文档，为了保证开发效率，我们引入了自动生成文档的注解，那么它是怎么工作的呢？另外在C层的测试类下，我们需要在文档中生成包含响应信息以及请求信息的文档，那么它们又是如何生成的呢？下面我们以部门类型（DepartmentType）的C层为例，说一下自动化文档生成的过程。">
+<meta name="twitter:image" content="http://www.mengyunzhi.cn/images/tags.png">
+  
+    <link rel="alternate" href="/atom.xml" title="梦云智" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦云智</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起做着靠谱的事情，这就是我们。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">最新文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.mengyunzhi.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-how-to-generate-auotomation-documents" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/23/how-to-generate-auotomation-documents/" class="article-date">
+  <time datetime="2017-06-23T13:45:17.000Z" itemprop="datePublished">2017-06-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/zhangjiahao/">zhangjiahao</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C层自动化文档生成过程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在前后台完全分离的项目中，前后台完成对接主要依据是开发文档，为了保证开发效率，我们引入了自动生成文档的注解，那么它是怎么工作的呢？另外在C层的测试类下，我们需要在文档中生成包含响应信息以及请求信息的文档，那么它们又是如何生成的呢？下面我们以部门类型（DepartmentType）的C层为例，说一下自动化文档生成的过程。<br><a id="more"></a></p>
+<h1 id="添加注解"><a href="#添加注解" class="headerlink" title="添加注解"></a>添加注解</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api</span>(tags = <span class="string">"DepartmentType (部门类型)"</span>, description = <span class="string">"部门 部门类型C层"</span>)</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/DepartmentType"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepartmentTypeController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">protected</span> DepartmentTypeService departmentTypeService;  <span class="comment">// 部门类型</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"获取所有数据"</span>, notes = <span class="string">"获取所有数据（未排序 ）@author:panjie"</span>, nickname = <span class="string">"DepartmentType_getAll"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;DepartmentType&gt; <span class="title">getAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> departmentTypeService.findAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在java代码中，如果我们想添加注解，那么首先我们应该引用@Api目录下的各种注解，其中对应于不同的注解有着不同的功能。<br>例如上例中，@Api(tags = “DepartmentType (部门类型)”, description = “部门 部门类型C层”) 这一行代码，我们将代码成功提交之后，会发现已经体现在了文档中。你也许会疑惑为什么没有看到nickname的作用呢？在后面我会说一下nickname的作用。</p>
+<h1 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h1><p>首先我么会发现在1.5的目录中tags标签里面新增了刚才添加的内容了。如下图所示：</p>
+<p><img src="/images/tags.png" alt=""></p>
+<p>另外在第三章中关于各个模块的描述中，我们也同样可以看到新增内容，其中与代码对应情况如下：</p>
+<p><img src="/images/all.png" alt=""></p>
+<h1 id="生成请求信息和响应信息"><a href="#生成请求信息和响应信息" class="headerlink" title="生成请求信息和响应信息"></a>生成请求信息和响应信息</h1><p>我们会发现，除了上面提到的几个API标签对应的内容以外，还有Response等响应信息，那么这些又是怎么生成的呢？这就涉及到我们的ControllerTest类了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAll</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    logger.info(<span class="string">"---- getAll方法测试 ----"</span>);</span><br><span class="line">    logger.info(<span class="string">"---- 创建一个部门类型实体 ----"</span>);</span><br><span class="line">    DepartmentType departmentType = <span class="keyword">new</span> DepartmentType();</span><br><span class="line">    System.out.println(departmentType);</span><br><span class="line">    logger.info(<span class="string">"保存该实体"</span>);</span><br><span class="line">    departmentTypeRepository.save(departmentType);</span><br><span class="line">    logger.info(<span class="string">"获取响应信息"</span>);</span><br><span class="line">    MvcResult mvcResult = <span class="keyword">this</span>.mockMvc.perform(get(<span class="string">"/DepartmentType/"</span>)</span><br><span class="line">            .contentType(<span class="string">"application/json"</span>)</span><br><span class="line">            .header(<span class="string">"x-auth-token"</span>, xAuthToken))</span><br><span class="line">            .andExpect(status().isOk())</span><br><span class="line">            .andDo(document(<span class="string">"DepartmentType_getAll"</span>, preprocessResponse(prettyPrint())))</span><br><span class="line">            .andReturn();</span><br><span class="line"></span><br><span class="line">    List&lt;DepartmentType&gt; departmentTypeList = (List&lt;DepartmentType&gt;) departmentTypeRepository.findAll();</span><br><span class="line"></span><br><span class="line">    logger.info(<span class="string">"断言获取到的数据条数与直接使用repository的实体数相同"</span>);</span><br><span class="line">    String content = mvcResult.getResponse().getContentAsString();</span><br><span class="line">    JSONArray JSONArray = net.sf.json.JSONArray.fromObject(content);</span><br><span class="line">    assertThat(JSONArray.size()).isEqualTo(departmentTypeList.size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面代码是C层中getAll方法的单元测试内容，代码this.mockMvc.perform(get(“/DepartmentType/“)中，get方法内对应的参数，即为Controller中对于get方法定义出来的url，这样子才能用mockMvc向应用程序发出请求，才能够继续执行下面的header、andExpect等函数。其中andDo(document(“DepartmentType_getAll”, preprocessResponse(prettyPrint())))的作用是获取相应信息并且打印出来，其中document函数中第一个参数，与C层中的nickname相同，这样我们才能正确的获取到打印信息。</p>
+<p>单元测试通过以后，我们提交代码并合并到development分支，我们便可以查看到完整的开发文档信息了。☺</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.mengyunzhi.cn/2017/06/23/how-to-generate-auotomation-documents/" data-id="cjbrki33t000h5ii77x5g51cx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/automation-documents/">automation documents</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/24/how-to-establish-directive/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          建立指令的步骤
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/23/how-to-establish-route/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">计量项目建立路由的流程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/chenyuanyuan/">chenyuanyuan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/chuhang/">chuhang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/gaoliming/">gaoliming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/liuxi/">liuxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/panjie/">panjie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/teacherPan/">teacherPan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/zhangjiahao/">zhangjiahao</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">@JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ManyToMany/">@ManyToMany</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bower/">Bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PagingAndSortingRepository/">PagingAndSortingRepository</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/">Spring MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularJs/">angularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/automation-documents/">automation documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backgroud/">backgroud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cascade/">cascade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-binding/">data binding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/">documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forever/">forever</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/format/">format</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gateway/">gateway</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-application/">java application</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/josn/">josn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageable/">pageable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protracto/">protracto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-Date/">sql.Date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/">translation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tute/">tute</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yeoman/">yeoman</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JsonView/" style="font-size: 10px;">@JsonView</a> <a href="/tags/ManyToMany/" style="font-size: 10px;">@ManyToMany</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/AngularJS/" style="font-size: 20px;">AngularJS</a> <a href="/tags/Bower/" style="font-size: 10px;">Bower</a> <a href="/tags/Hibernate/" style="font-size: 12.5px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 17.5px;">JPA</a> <a href="/tags/JsonView/" style="font-size: 10px;">JsonView</a> <a href="/tags/PagingAndSortingRepository/" style="font-size: 10px;">PagingAndSortingRepository</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/SpringMVC/" style="font-size: 15px;">SpringMVC</a> <a href="/tags/SpringMvc/" style="font-size: 12.5px;">SpringMvc</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/angularJs/" style="font-size: 10px;">angularJs</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/automation-documents/" style="font-size: 10px;">automation documents</a> <a href="/tags/backgroud/" style="font-size: 10px;">backgroud</a> <a href="/tags/cascade/" style="font-size: 10px;">cascade</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/data-binding/" style="font-size: 10px;">data binding</a> <a href="/tags/documents/" style="font-size: 10px;">documents</a> <a href="/tags/forever/" style="font-size: 10px;">forever</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/freebsd/" style="font-size: 15px;">freebsd</a> <a href="/tags/gateway/" style="font-size: 10px;">gateway</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/java-application/" style="font-size: 10px;">java application</a> <a href="/tags/josn/" style="font-size: 10px;">josn</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/macos/" style="font-size: 10px;">macos</a> <a href="/tags/maven/" style="font-size: 12.5px;">maven</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/pageable/" style="font-size: 10px;">pageable</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/protracto/" style="font-size: 10px;">protracto</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring boot</a> <a href="/tags/spring-mvc/" style="font-size: 12.5px;">spring mvc</a> <a href="/tags/sql-Date/" style="font-size: 10px;">sql.Date</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/tute/" style="font-size: 10px;">tute</a> <a href="/tags/yeoman/" style="font-size: 12.5px;">yeoman</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/29/how-to-start-measurement-project/">如何启动测量项目</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/22/instrument-audit/">计量项目前台部分Controller之间的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/20/java-exception-handling/">java-exception-handling</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/java-dynamic-data-structure/">ArrayList、LinkedList和HashSet的学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 梦云智<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">最新文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

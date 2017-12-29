@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>净水器API | 梦云智</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="净水器方提供API接口，负责处理单个净水器的请求信息。如获取充值信息，用户使用净水器信息等。">
+<meta name="keywords" content="API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="净水器API">
+<meta property="og:url" content="http://www.mengyunzhi.cn/2017/06/29/WaterPurifier-API/index.html">
+<meta property="og:site_name" content="梦云智">
+<meta property="og:description" content="净水器方提供API接口，负责处理单个净水器的请求信息。如获取充值信息，用户使用净水器信息等。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.mengyunzhi.cn/images/1.png">
+<meta property="og:updated_time" content="2017-12-29T06:58:04.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="净水器API">
+<meta name="twitter:description" content="净水器方提供API接口，负责处理单个净水器的请求信息。如获取充值信息，用户使用净水器信息等。">
+<meta name="twitter:image" content="http://www.mengyunzhi.cn/images/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="梦云智" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦云智</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起做着靠谱的事情，这就是我们。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">最新文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.mengyunzhi.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-WaterPurifier-API" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/29/WaterPurifier-API/" class="article-date">
+  <time datetime="2017-06-29T02:30:09.000Z" itemprop="datePublished">2017-06-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/chuhang/">chuhang</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      净水器API
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>净水器方提供API接口，负责处理单个净水器的请求信息。如获取充值信息，用户使用净水器信息等。</p>
+<a id="more"></a>
+<h1 id="API列表"><a href="#API列表" class="headerlink" title="API列表"></a>API列表</h1><ul>
+<li><a href="./#getCurrentTime">getCurrentTime</a>  ，获取服务器当前时间</li>
+<li><a href="./#getRechargeInfo">getRechargeInfo</a> ， 获取充值信息</li>
+<li><a href="./#isRechargeOk">isRechargeOk</a>  ，反馈充值结果</li>
+<li><a href="./#useInfo">useInfo</a> ，净水器使用信息</li>
+</ul>
+<h1 id="getCurrentTime"><a href="#getCurrentTime" class="headerlink" title="getCurrentTime"></a>getCurrentTime</h1><p>获取服务器当前时间</p>
+<h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><p><a href="https://api.water.mengyunzhi.com/getCurrentTime" target="_blank" rel="noopener">https://api.water.mengyunzhi.com/getCurrentTime</a> </p>
+<h2 id="支持格式"><a href="#支持格式" class="headerlink" title="支持格式"></a>支持格式</h2><p>JSON</p>
+<h2 id="HTTP请求方式"><a href="#HTTP请求方式" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h2><p>GET</p>
+<h2 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h2><p>无</p>
+<h2 id="请求示例"><a href="#请求示例" class="headerlink" title="请求示例"></a>请求示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /api/getCurrentTime HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded;charset=UTF-8</span><br><span class="line">Host: https://api.water.mengyunzhi.com</span><br></pre></td></tr></table></figure>
+<h2 id="响应结果示例"><a href="#响应结果示例" class="headerlink" title="响应结果示例"></a>响应结果示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/plain;charset=ISO-8859-1</span><br><span class="line">Content-Length: 10</span><br><span class="line">  </span><br><span class="line">1497457292548</span><br></pre></td></tr></table></figure>
+<h1 id="getRechargeInfo"><a href="#getRechargeInfo" class="headerlink" title="getRechargeInfo"></a>getRechargeInfo</h1><p>获取充值水量</p>
+<h2 id="URL-1"><a href="#URL-1" class="headerlink" title="URL"></a>URL</h2><p><a href="https://api.water.mengyunzhi.com/getRechargeInfo" target="_blank" rel="noopener">https://api.water.mengyunzhi.com/getRechargeInfo</a></p>
+<h2 id="支持格式-1"><a href="#支持格式-1" class="headerlink" title="支持格式"></a>支持格式</h2><p>JSON</p>
+<h2 id="HTTP请求方式-1"><a href="#HTTP请求方式-1" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h2><p>GET</p>
+<h2 id="请求参数-1"><a href="#请求参数-1" class="headerlink" title="请求参数"></a>请求参数</h2><p>无</p>
+<h2 id="请求头信息"><a href="#请求头信息" class="headerlink" title="请求头信息"></a>请求头信息</h2><ul>
+<li>id。类型：Long。说明：净水器编号。</li>
+<li>timestamp。类型：String。说明：时间戳。</li>
+<li>randomString。类型：String。说明：随机生成的字符串。</li>
+<li>encryptionInfo。类型：String。将timestamp、randomString、”mengyunzhi”进行字符串拼接（格式：timestamp + randomString + “mengyunzhi”），并对拼接结果进行sha1加密，生成encryptionInfo。</li>
+</ul>
+<h2 id="请求示例-1"><a href="#请求示例-1" class="headerlink" title="请求示例"></a>请求示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /api/getRechargeInfo</span><br><span class="line">Content-Type: application/x-www-form-urlencoded;charset=UTF-8</span><br><span class="line">Id:1</span><br><span class="line">Timestamp: 1497457292548</span><br><span class="line">RandomString: unzdtggyopn1fl7sx68b8olxr</span><br><span class="line">EncryptionInfo: 37cde59cfa3384c84d9bf7545be348bc880c79bd</span><br><span class="line">Host: https://api.water.mengyunzhi.com</span><br></pre></td></tr></table></figure>
+<h2 id="响应结果示例-1"><a href="#响应结果示例-1" class="headerlink" title="响应结果示例"></a>响应结果示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Content-Length: 2</span><br><span class="line">   </span><br><span class="line">[&#123;</span><br><span class="line">	&quot;id&quot;: 1(充值编号),</span><br><span class="line">	&quot;shouldRecharge&quot;: 200(应充水量)</span><br><span class="line">&#125;,&#123;</span><br><span class="line">	&quot;id&quot;: 1(充值编号),</span><br><span class="line">	&quot;shouldRecharge&quot;: 300(应充水量)</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<h1 id="isRechargeOk"><a href="#isRechargeOk" class="headerlink" title="isRechargeOk"></a>isRechargeOk</h1><p>反馈充值结果</p>
+<h2 id="URL-2"><a href="#URL-2" class="headerlink" title="URL"></a>URL</h2><p><a href="https://api.water.mengyunzhi.com/isRechargeOk" target="_blank" rel="noopener">https://api.water.mengyunzhi.com/isRechargeOk</a></p>
+<h2 id="支持格式-2"><a href="#支持格式-2" class="headerlink" title="支持格式"></a>支持格式</h2><p>JSON</p>
+<h2 id="HTTP请求方式-2"><a href="#HTTP请求方式-2" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h2><p>POST</p>
+<h2 id="请求body信息"><a href="#请求body信息" class="headerlink" title="请求body信息"></a>请求body信息</h2><ul>
+<li>id。类型：Long。说明：充值编号。</li>
+<li>status。类型：String。说明：充值状态，充值成功（success）或者充值失败（error）。<blockquote>
+<p>json数组格式</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="请求头信息-1"><a href="#请求头信息-1" class="headerlink" title="请求头信息"></a>请求头信息</h2><ul>
+<li>id。类型：Long。说明：净水器编号。</li>
+<li>timestamp。类型：String。说明：时间戳。</li>
+<li>randomString。类型：String。说明：随机生成的字符串。</li>
+<li>encryptionInfo。类型：String。将timestamp、randomString、”mengyunzhi”进行字符串拼接（格式：timestamp + randomString + “mengyunzhi”），并对拼接结果进行sha1加密，生成encryptionInfo。</li>
+</ul>
+<h2 id="请求示例-2"><a href="#请求示例-2" class="headerlink" title="请求示例"></a>请求示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST /api/isRechargeOk HTTP/1.1</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Host: https://api.water.mengyunzhi.com</span><br><span class="line">Id: 1</span><br><span class="line">Timestamp: 1497457292548</span><br><span class="line">RandomString: unzdtggyopn1fl7sx68b8olxr</span><br><span class="line">EncryptionInfo: 37cde59cfa3384c84d9bf7545be348bc880c79bd</span><br><span class="line">   </span><br><span class="line">[&#123;</span><br><span class="line">	&quot;id&quot;: 1(充值编号),</span><br><span class="line">	&quot;status&quot;: &quot;success&quot;(充值状态)</span><br><span class="line">&#125;,&#123;</span><br><span class="line">	&quot;id&quot;: 1(充值编号),</span><br><span class="line">	&quot;shouldRecharge&quot;: &quot;error&quot;(充值状态)</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<h2 id="响应结果示例-2"><a href="#响应结果示例-2" class="headerlink" title="响应结果示例"></a>响应结果示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br></pre></td></tr></table></figure>
+<h1 id="useInfo"><a href="#useInfo" class="headerlink" title="useInfo"></a>useInfo</h1><p>净水器使用信息</p>
+<h2 id="URL-3"><a href="#URL-3" class="headerlink" title="URL"></a>URL</h2><p><a href="https://api.water.mengyunzhi.com/useInfo" target="_blank" rel="noopener">https://api.water.mengyunzhi.com/useInfo</a></p>
+<h2 id="支持格式-3"><a href="#支持格式-3" class="headerlink" title="支持格式"></a>支持格式</h2><p>JSON</p>
+<h2 id="HTTP请求方式-3"><a href="#HTTP请求方式-3" class="headerlink" title="HTTP请求方式"></a>HTTP请求方式</h2><p>POST</p>
+<h2 id="请求参数-2"><a href="#请求参数-2" class="headerlink" title="请求参数"></a>请求参数</h2><ul>
+<li>usedBeforeWaterQuality。类型：int。说明：净水前水质。</li>
+<li>usedAfterWaterQuality。类型：int。说明：净水后水质。</li>
+<li>usedWaterQuantity。类型：int。说明：用水量。</li>
+</ul>
+<h2 id="请求头信息-2"><a href="#请求头信息-2" class="headerlink" title="请求头信息"></a>请求头信息</h2><ul>
+<li>id。类型：Long。说明：净水器编号。</li>
+<li>timestamp。类型：String。说明：时间戳。</li>
+<li>randomString。类型：String。说明：随机生成的字符串。</li>
+<li>encryptionInfo。类型：String。将timestamp、randomString、”mengyunzhi”进行字符串拼接（格式：timestamp + randomString + “mengyunzhi”），并对拼接结果进行sha1加密，生成encryptionInfo。</li>
+</ul>
+<h2 id="请求示例-3"><a href="#请求示例-3" class="headerlink" title="请求示例"></a>请求示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /api/useInfo HTTP/1.1</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Host: https://api.water.mengyunzhi.com</span><br><span class="line">Id: 1</span><br><span class="line">Timestamp: 1497457292548</span><br><span class="line">RandomString: unzdtggyopn1fl7sx68b8olxr</span><br><span class="line">EncryptionInfo: 37cde59cfa3384c84d9bf7545be348bc880c79bd</span><br><span class="line">   </span><br><span class="line">&#123;</span><br><span class="line">	&quot;usedBeforeWaterQuality&quot;: 80（净水前水质）,</span><br><span class="line">	&quot;usedAfterWaterQuality&quot;: 90（净水后水质）,</span><br><span class="line">	&quot;usedWaterQuantity&quot;: 200（用水量）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="响应结果示例-3"><a href="#响应结果示例-3" class="headerlink" title="响应结果示例"></a>响应结果示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br></pre></td></tr></table></figure>
+<h1 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h1><p><img src="/images/1.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.mengyunzhi.cn/2017/06/29/WaterPurifier-API/" data-id="cjbrki34f00125ii77bgfca9n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/">API</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/29/translationOfJPADocument/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JPA参考文献的翻译（部分）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/27/watch-element-in-directives/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">监听指令的外部数据源变化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/chenyuanyuan/">chenyuanyuan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/chuhang/">chuhang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/gaoliming/">gaoliming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/liuxi/">liuxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/panjie/">panjie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/teacherPan/">teacherPan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/zhangjiahao/">zhangjiahao</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">@JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ManyToMany/">@ManyToMany</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bower/">Bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PagingAndSortingRepository/">PagingAndSortingRepository</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/">Spring MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularJs/">angularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/automation-documents/">automation documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backgroud/">backgroud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cascade/">cascade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-binding/">data binding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/">documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forever/">forever</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/format/">format</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gateway/">gateway</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-application/">java application</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/josn/">josn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageable/">pageable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protracto/">protracto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-Date/">sql.Date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/">translation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tute/">tute</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yeoman/">yeoman</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JsonView/" style="font-size: 10px;">@JsonView</a> <a href="/tags/ManyToMany/" style="font-size: 10px;">@ManyToMany</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/AngularJS/" style="font-size: 20px;">AngularJS</a> <a href="/tags/Bower/" style="font-size: 10px;">Bower</a> <a href="/tags/Hibernate/" style="font-size: 12.5px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 17.5px;">JPA</a> <a href="/tags/JsonView/" style="font-size: 10px;">JsonView</a> <a href="/tags/PagingAndSortingRepository/" style="font-size: 10px;">PagingAndSortingRepository</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/SpringMVC/" style="font-size: 15px;">SpringMVC</a> <a href="/tags/SpringMvc/" style="font-size: 12.5px;">SpringMvc</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/angularJs/" style="font-size: 10px;">angularJs</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/automation-documents/" style="font-size: 10px;">automation documents</a> <a href="/tags/backgroud/" style="font-size: 10px;">backgroud</a> <a href="/tags/cascade/" style="font-size: 10px;">cascade</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/data-binding/" style="font-size: 10px;">data binding</a> <a href="/tags/documents/" style="font-size: 10px;">documents</a> <a href="/tags/forever/" style="font-size: 10px;">forever</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/freebsd/" style="font-size: 15px;">freebsd</a> <a href="/tags/gateway/" style="font-size: 10px;">gateway</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/java-application/" style="font-size: 10px;">java application</a> <a href="/tags/josn/" style="font-size: 10px;">josn</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/macos/" style="font-size: 10px;">macos</a> <a href="/tags/maven/" style="font-size: 12.5px;">maven</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/pageable/" style="font-size: 10px;">pageable</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/protracto/" style="font-size: 10px;">protracto</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring boot</a> <a href="/tags/spring-mvc/" style="font-size: 12.5px;">spring mvc</a> <a href="/tags/sql-Date/" style="font-size: 10px;">sql.Date</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/tute/" style="font-size: 10px;">tute</a> <a href="/tags/yeoman/" style="font-size: 12.5px;">yeoman</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/29/how-to-start-measurement-project/">如何启动测量项目</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/22/instrument-audit/">计量项目前台部分Controller之间的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/20/java-exception-handling/">java-exception-handling</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/java-dynamic-data-structure/">ArrayList、LinkedList和HashSet的学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 梦云智<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">最新文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

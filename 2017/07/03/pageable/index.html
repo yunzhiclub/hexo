@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何实现分页（M层） | 梦云智</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天学习了潘老师写的器具类别的分页，讲述一下对代码的理解。有不足之处，欢迎批评指正。 将获取到的数据进行规定条数的分页继承PagingAndSortingRepository首先我们对获取到的所有的数据进行分页。我们应该知道，分页并不是CrudRepository里面自带的方法，所以我们需要引入。简单的方法是，我们可以在InstrumentTypeRepository中，将其进行对PagingAn">
+<meta name="keywords" content="pageable,PagingAndSortingRepository">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现分页（M层）">
+<meta property="og:url" content="http://www.mengyunzhi.cn/2017/07/03/pageable/index.html">
+<meta property="og:site_name" content="梦云智">
+<meta property="og:description" content="今天学习了潘老师写的器具类别的分页，讲述一下对代码的理解。有不足之处，欢迎批评指正。 将获取到的数据进行规定条数的分页继承PagingAndSortingRepository首先我们对获取到的所有的数据进行分页。我们应该知道，分页并不是CrudRepository里面自带的方法，所以我们需要引入。简单的方法是，我们可以在InstrumentTypeRepository中，将其进行对PagingAn">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-29T06:58:04.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何实现分页（M层）">
+<meta name="twitter:description" content="今天学习了潘老师写的器具类别的分页，讲述一下对代码的理解。有不足之处，欢迎批评指正。 将获取到的数据进行规定条数的分页继承PagingAndSortingRepository首先我们对获取到的所有的数据进行分页。我们应该知道，分页并不是CrudRepository里面自带的方法，所以我们需要引入。简单的方法是，我们可以在InstrumentTypeRepository中，将其进行对PagingAn">
+  
+    <link rel="alternate" href="/atom.xml" title="梦云智" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦云智</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起做着靠谱的事情，这就是我们。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">最新文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.mengyunzhi.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-pageable" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/03/pageable/" class="article-date">
+  <time datetime="2017-07-03T12:35:42.000Z" itemprop="datePublished">2017-07-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/zhangjiahao/">zhangjiahao</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何实现分页（M层）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天学习了潘老师写的器具类别的分页，讲述一下对代码的理解。有不足之处，欢迎批评指正。</p>
+<h1 id="将获取到的数据进行规定条数的分页"><a href="#将获取到的数据进行规定条数的分页" class="headerlink" title="将获取到的数据进行规定条数的分页"></a>将获取到的数据进行规定条数的分页</h1><h2 id="继承PagingAndSortingRepository"><a href="#继承PagingAndSortingRepository" class="headerlink" title="继承PagingAndSortingRepository"></a>继承PagingAndSortingRepository</h2><p>首先我们对获取到的所有的数据进行分页。我们应该知道，分页并不是CrudRepository里面自带的方法，所以我们需要引入。简单的方法是，我们可以在InstrumentTypeRepository中，将其进行对PagingAndSortingRepository的继承，然后在该类定义函数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface InstrumentTypeRepository extends PagingAndSortingRepository&lt;InstrumentType, Long&gt;</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="M层直接调用方法"><a href="#M层直接调用方法" class="headerlink" title="M层直接调用方法"></a>M层直接调用方法</h2><p>这样，在InstrumentTypeServiceImpl类中就可以调用PagingAndSortingRepository中的分页方法了。下面是对分页数为20的代码的编写：</p>
+<p>我们在InstrumentTypeServiceImpl中关于getAll的方法如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;InstrumentType&gt; getAll()</span><br><span class="line">&#123;</span><br><span class="line">	List&lt;InstrumentType&gt; list = new ArrayList&lt;InstrumentType&gt;();</span><br><span class="line">	list = (List&lt;InstrumentType&gt;) instrumentTypeRepository.findAll(new PageRequest(page:1, size:20));</span><br><span class="line">	return list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可是我们很轻易的就发现，这样写虽然很简单，但是不能动态的生成我们需要的分页数。假如我们想生成分页数为10的话，那么还得需要我们去手动的修改源代码。所以接下来我们看一看如何动态的生成分页的代码。</p>
+<h1 id="动态生成分页"><a href="#动态生成分页" class="headerlink" title="动态生成分页"></a>动态生成分页</h1><h2 id="Repository中进行方法的定义"><a href="#Repository中进行方法的定义" class="headerlink" title="Repository中进行方法的定义"></a>Repository中进行方法的定义</h2><p>同样的，我们还是以InstrumentType为例。示例方法为通过学科id获取对应的全部的器具类别信息并进行分页。但是这次我们像往常一样只需要继承CrudRepository。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface InstrumentTypeRepository extends CrudRepository&lt;InstrumentType, Long&gt;&#123;</span><br><span class="line">    Page&lt;InstrumentType&gt; findAllByDisciplineId(Long id, Pageable pageable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们看到在该类下定义了函数findAllByDisciplineId，其中传入的参数为学科id，和pageable对象。pageable需要进行Pageable类的引入，同样的Page类也需要进行引入，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.data.domain.Page;</span><br><span class="line">import org.springframework.data.domain.Pageable;</span><br></pre></td></tr></table></figure></p>
+<p>当然，如果我们用的IDEA编译器的话，它会自动提示我们去引入该包。</p>
+<blockquote>
+<p>Pageable是Spring Data库中定义的一个接口，该接口是所有分页相关信息的一个抽象，通过该接口，我们可以得到和分页相关的所有信息，例如pageNumber、pageSize等。<br>Pageable定义了很多方法，但是我们需要用到的信息只有两个，一个是分页的信息（page、size），一个是排序的信息。在springmc的请求中只需要在方法的参数中直接定义一个pageable类型的对象，当Spring发现这个参数时，Spring会自动根据request的参数来组装该pageable对象，Spring支持的request参数如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">page，第几页，从0开始，默认为第0页  </span><br><span class="line">size，每一页的大小，默认为20  </span><br><span class="line">sort，排序相关的信息，以property,property(,ASC|DESC)的方式组织，例如sort=firstname&amp;sort=lastname,desc表示在按firstname正序排列基础上按lastname倒序排列。</span><br></pre></td></tr></table></figure></p>
+<p>不太明白的一点是，findAllByDisciplineId这个方法名是自己起的，但是起名的格式该类下在有没有什么规定，才能实现通过学科id获取器具类别的信息。</p>
+</blockquote>
+<h2 id="Service层以及Service层的实现类"><a href="#Service层以及Service层的实现类" class="headerlink" title="Service层以及Service层的实现类"></a>Service层以及Service层的实现类</h2><p>然后再Service层我们定义分页的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Page&lt;InstrumentType&gt; getAllByDisciplineId(Long id, Pageable pageable);</span><br></pre></td></tr></table></figure></p>
+<p>其中返回值为page类型的数组对象，传入值为学科id以及pageable对象。</p>
+<p>ServiceImpl中,我们进行方法的实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public Page&lt;InstrumentType&gt; getAllByDisciplineId(Long id, Pageable pageable) </span><br><span class="line">    &#123;</span><br><span class="line">        Page&lt;InstrumentType&gt; page = instrumentTypeRepository.findAllByDisciplineId(id, pageable);</span><br><span class="line">        return page;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在实现类中，我们将传入的pageable对象利用Repository类中定义的方法，返回值为类型为Page的数组对象。</p>
+<h2 id="Test类中的测试"><a href="#Test类中的测试" class="headerlink" title="Test类中的测试"></a>Test类中的测试</h2><p>有了定义好的方法，下面我们对其进行测试。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">   public void page() &#123;</span><br><span class="line">   	// 新建学科实体，设置name、pinyin属性并保存</span><br><span class="line">       Discipline discipline = new Discipline();</span><br><span class="line">       discipline.setName(&quot;namesdfsdfdf&quot;);</span><br><span class="line">       discipline.setPinyin(&quot;pinyin&quot;);</span><br><span class="line">       disciplineRepository.save(discipline);</span><br><span class="line">	// 新建器具类别实体，设置name、pinyin、学科类别属性并保存</span><br><span class="line">       InstrumentType instrumentType = new InstrumentType();</span><br><span class="line">       instrumentType.setName(&quot;name&quot;);</span><br><span class="line">       instrumentType.setPinyin(&quot;pinyin&quot;);</span><br><span class="line">       instrumentType.setDiscipline(discipline);</span><br><span class="line">       instrumentTypeRepository.save(instrumentType);</span><br><span class="line">	// 新建器具类别实体1，设置name、pinyin、学科类别属性并保存</span><br><span class="line">       InstrumentType instrumentType1 = new InstrumentType();</span><br><span class="line">       instrumentType1.setName(&quot;namesdfd&quot;);</span><br><span class="line">       instrumentType1.setPinyin(&quot;pinyinsdfsdf&quot;);</span><br><span class="line">       instrumentType1.setDiscipline(discipline);</span><br><span class="line">       instrumentTypeRepository.save(instrumentType1);		</span><br><span class="line">	// 定义pageRequest对象，设置分页信息。从第一页开始显示，分页大小为1。</span><br><span class="line">       final PageRequest pageRequest = new PageRequest(</span><br><span class="line">               page:1, size:1</span><br><span class="line">       );</span><br><span class="line">       Page&lt;InstrumentType&gt; page = instrumentTypeRepository.findAllByDisciplineId(discipline.getId(), pageRequest);</span><br><span class="line">       // 断言一共是两页，因为分页大小为1，有两条信息</span><br><span class="line">       assertThat(page.getTotalPages()).isEqualTo(2);</span><br><span class="line">       // 断言分页大小为1</span><br><span class="line">       assertThat(page.getContent().size()).isEqualTo(1);</span><br><span class="line">       // 删除器具类别实体，删除学科类别试题</span><br><span class="line">       instrumentTypeRepository.delete(instrumentType1);</span><br><span class="line">       instrumentTypeRepository.delete(instrumentType);</span><br><span class="line">       disciplineRepository.delete(discipline);</span><br><span class="line">       return;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就可以在C层去调用刚刚写好的关于分页的函数啦！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.mengyunzhi.cn/2017/07/03/pageable/" data-id="cjbrki34l001a5ii7pwghafv2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PagingAndSortingRepository/">PagingAndSortingRepository</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pageable/">pageable</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/05/how-to-restart-a-new-javaj-application/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          如何重启服务器(freebsd系统)上的JAVA应用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/29/translationOfJPADocument/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JPA参考文献的翻译（部分）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/chenyuanyuan/">chenyuanyuan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/chuhang/">chuhang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/gaoliming/">gaoliming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/liuxi/">liuxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/panjie/">panjie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/teacherPan/">teacherPan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/zhangjiahao/">zhangjiahao</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">@JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ManyToMany/">@ManyToMany</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bower/">Bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PagingAndSortingRepository/">PagingAndSortingRepository</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/">Spring MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularJs/">angularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/automation-documents/">automation documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backgroud/">backgroud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cascade/">cascade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-binding/">data binding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/">documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forever/">forever</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/format/">format</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gateway/">gateway</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-application/">java application</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/josn/">josn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageable/">pageable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protracto/">protracto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-Date/">sql.Date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/">translation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tute/">tute</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yeoman/">yeoman</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JsonView/" style="font-size: 10px;">@JsonView</a> <a href="/tags/ManyToMany/" style="font-size: 10px;">@ManyToMany</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/AngularJS/" style="font-size: 20px;">AngularJS</a> <a href="/tags/Bower/" style="font-size: 10px;">Bower</a> <a href="/tags/Hibernate/" style="font-size: 12.5px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 17.5px;">JPA</a> <a href="/tags/JsonView/" style="font-size: 10px;">JsonView</a> <a href="/tags/PagingAndSortingRepository/" style="font-size: 10px;">PagingAndSortingRepository</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/SpringMVC/" style="font-size: 15px;">SpringMVC</a> <a href="/tags/SpringMvc/" style="font-size: 12.5px;">SpringMvc</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/angularJs/" style="font-size: 10px;">angularJs</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/automation-documents/" style="font-size: 10px;">automation documents</a> <a href="/tags/backgroud/" style="font-size: 10px;">backgroud</a> <a href="/tags/cascade/" style="font-size: 10px;">cascade</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/data-binding/" style="font-size: 10px;">data binding</a> <a href="/tags/documents/" style="font-size: 10px;">documents</a> <a href="/tags/forever/" style="font-size: 10px;">forever</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/freebsd/" style="font-size: 15px;">freebsd</a> <a href="/tags/gateway/" style="font-size: 10px;">gateway</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/java-application/" style="font-size: 10px;">java application</a> <a href="/tags/josn/" style="font-size: 10px;">josn</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/macos/" style="font-size: 10px;">macos</a> <a href="/tags/maven/" style="font-size: 12.5px;">maven</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/pageable/" style="font-size: 10px;">pageable</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/protracto/" style="font-size: 10px;">protracto</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring boot</a> <a href="/tags/spring-mvc/" style="font-size: 12.5px;">spring mvc</a> <a href="/tags/sql-Date/" style="font-size: 10px;">sql.Date</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/tute/" style="font-size: 10px;">tute</a> <a href="/tags/yeoman/" style="font-size: 12.5px;">yeoman</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/29/how-to-start-measurement-project/">如何启动测量项目</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/22/instrument-audit/">计量项目前台部分Controller之间的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/20/java-exception-handling/">java-exception-handling</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/java-dynamic-data-structure/">ArrayList、LinkedList和HashSet的学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 梦云智<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">最新文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>解决使用spring boot mvc的@JsonView注解返回page为空的问题 | 梦云智</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="要spring mvc中，我们使用@JsonView注解来定义内容输出。但如果我们返回分页数据Page的话，却意外的行到了{}。这是由于@JsonView注解并没有在Page类型上起作用。所以导致返回类型为Page时，输出空内容。">
+<meta name="keywords" content="spring mvc,spring boot,@JsonView">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决使用spring boot mvc的@JsonView注解返回page为空的问题">
+<meta property="og:url" content="http://www.mengyunzhi.cn/2017/07/30/spring-boot-mvc-JsonView-page-emtpy-object/index.html">
+<meta property="og:site_name" content="梦云智">
+<meta property="og:description" content="要spring mvc中，我们使用@JsonView注解来定义内容输出。但如果我们返回分页数据Page的话，却意外的行到了{}。这是由于@JsonView注解并没有在Page类型上起作用。所以导致返回类型为Page时，输出空内容。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-29T06:58:04.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决使用spring boot mvc的@JsonView注解返回page为空的问题">
+<meta name="twitter:description" content="要spring mvc中，我们使用@JsonView注解来定义内容输出。但如果我们返回分页数据Page的话，却意外的行到了{}。这是由于@JsonView注解并没有在Page类型上起作用。所以导致返回类型为Page时，输出空内容。">
+  
+    <link rel="alternate" href="/atom.xml" title="梦云智" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦云智</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起做着靠谱的事情，这就是我们。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">最新文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.mengyunzhi.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring-boot-mvc-JsonView-page-emtpy-object" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/30/spring-boot-mvc-JsonView-page-emtpy-object/" class="article-date">
+  <time datetime="2017-07-30T03:43:02.000Z" itemprop="datePublished">2017-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/teacherPan/">teacherPan</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      解决使用spring boot mvc的@JsonView注解返回page为空的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>要<code>spring mvc</code>中，我们使用<code>@JsonView</code>注解来定义内容输出。但如果我们返回分页数据<code>Page</code>的话，却意外的行到了<code>{}</code>。这是由于<code>@JsonView</code>注解并没有在<code>Page</code>类型上起作用。所以导致返回类型为<code>Page</code>时，输出空内容。</p>
+<a id="more"></a>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>针对此问题，网上的解决方案并不统一。最后，找到如下解决方案: 即对<code>WebMvcConfigurerAdapter</code>进行配置。重写<code>public void configureMessageConverters</code>方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">private</span> Logger logger = Logger.getLogger(WebConfig.class.getName());</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解决spring mvc <span class="doctag">@jsonview</span> page empty(springMvc 使用jsonView时，返回page信息为空对象)的问题</span></span><br><span class="line"><span class="comment">     * 这个问题的解决方案适用的比较少，而且还有信息存在误导。</span></span><br><span class="line"><span class="comment">     * 最后总结下解决方法：</span></span><br><span class="line"><span class="comment">     * 1.绝对不能在配置文件中去配置那个 DEFAULT_VIEW_INCLUSION。</span></span><br><span class="line"><span class="comment">     * 如果这么做了，就会发现C层配置的JsonView会完全失去作用</span></span><br><span class="line"><span class="comment">     * 2. 本问题中，spring 官方社区的回答比stackoverflow 还要靠谱。</span></span><br><span class="line"><span class="comment">     * 在 https://jira.spring.io/browse/SPR-13331 的回答中，甚至有了给出了github的地址</span></span><br><span class="line"><span class="comment">     * 3. 参考代码时，要使其它的配置完全相同，比如我在参考时，就是在已经设置了DEFAULT_VIEW_INCLUSION为true的前提下；</span></span><br><span class="line"><span class="comment">     *    而这个配置项，参考代码中并没有。进而没有在第一时间内验证出参考代码的正确性。</span></span><br><span class="line"><span class="comment">     * 正确的可被参考的代码：https://github.com/sdeleuze/SpringSampleProject</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * 总结：问题解决了大概两天的时间。开始低估了问题了难度，当发现初步找的答案并不能解决实际问题时。</span></span><br><span class="line"><span class="comment">     * 并没有沉下心来去看每一篇google到的文章。</span></span><br><span class="line"><span class="comment">     * 最后，静心的仔细的学习了每一篇文章，并找到了相关的示例代码，同时删除了按照其它方法配置的不适用配置项后。</span></span><br><span class="line"><span class="comment">     * 问题得以解决。</span></span><br><span class="line"><span class="comment">     * 所以：</span></span><br><span class="line"><span class="comment">     * 1. 当发现低估问题的难度的时候，确诊关键字没有问题，就要静心来学习。</span></span><br><span class="line"><span class="comment">     * 2. 每找到一个方法，都值得一试。但不要将两种解决方案同时试。试第一种不行，就要将代码进行恢复。</span></span><br><span class="line"><span class="comment">     * 然后才能继续试第二种。</span></span><br><span class="line"><span class="comment">     * 3. 读懂找到资料的每一行英文，这很重要！</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> converters</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> </span>&#123;</span><br><span class="line">        ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().defaultViewInclusion(<span class="keyword">true</span>).build();</span><br><span class="line">        converters.add(<span class="keyword">new</span> MappingJackson2HttpMessageConverter(mapper));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>在使用时，我们可以直接使用<code>@JsonView</code>在控制器上，如果我们未设置实体中的注解信息，则会发现什么变化都没有发生。<br>如果我们想排除某此字段，则需要如下使用：</p>
+<p>假设我们有以下实体：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> sex;</span><br><span class="line">    <span class="meta">@ManyToOne</span></span><br><span class="line">    <span class="keyword">private</span> Klass klass;    <span class="comment">// 班级</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 班级</span></span><br><span class="line">Class Klass &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@OneToMany</span>(mappedBy = <span class="string">"klass"</span>)</span><br><span class="line">    <span class="keyword">private</span> Set&lt;Student&gt; students = <span class="keyword">new</span> HashSet&lt;&gt;();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h2><p>在输出学生时，输出班级信息，同时忽略班级中的<code>students</code><br>控制器如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/Student"</span>)</span><br><span class="line">Class StudentController &#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(/&#123;id&#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Student <span class="title">get</span><span class="params">(@PathVar....)</span> </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>建立一个接口，并用这个接口注解<code>@ManyToOne</code>, <code>@OneToMany</code>.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">NoneJsonView</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>加入注解，只有在控制器中使用<code>NoneJsonView</code>时，才会被序列化.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> sex;</span><br><span class="line">    <span class="meta">@ManyToOne</span></span><br><span class="line">    <span class="meta">@JsonView</span>(NoneJsonView.class)</span><br><span class="line">    <span class="keyword">private</span> Klass klass;    <span class="comment">// 班级</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 班级</span></span><br><span class="line">Class Klass &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@OneToMany</span>(mappedBy = <span class="string">"klass"</span>)</span><br><span class="line">    <span class="meta">@JsonView</span>(NoneJsonView.class)</span><br><span class="line">    <span class="keyword">private</span> Set&lt;Student&gt; students = <span class="keyword">new</span> HashSet&lt;&gt;();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在建立一个接口，用以输出指定字段<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">StudentGet</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>由于我们想输出学生的班级信息，所以将注解加入到学生的班级字段上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> sex;</span><br><span class="line">    <span class="meta">@ManyToOne</span></span><br><span class="line">    <span class="meta">@JsonView</span>(&#123;NoneJsonView.class, StudentGet.class&#125;)</span><br><span class="line">    <span class="keyword">private</span> Klass klass;    <span class="comment">// 班级</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在控制器上加入注解<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/Student"</span>)</span><br><span class="line">Class StudentController &#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(/&#123;id&#125;)</span><br><span class="line">    <span class="meta">@JsonView</span>(StudentGet.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Student <span class="title">get</span><span class="params">(@PathVar....)</span> </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>我们在控制器上使用的注解为<code>@JsonView(StudentGet.class)</code>表示：只有未加注解或是加了注解并且对应<code>@JsonView(StudentGet.class)</code>的字段，才会被序列化。<br>由于<code>Stuent</code>的全部字段都符合上述的规则，所以全部会被序列化。<br>而<code>Klass</code>中的<code>stuents</code>字段，由于加入了<code>@JsonView(NoneJsonView.class)</code>，但该注解并不对应<code>@JsonView(StudentGet.class)</code>, 所以将不被序列化。</p>
+<p>目标实现</p>
+<h2 id="场景二"><a href="#场景二" class="headerlink" title="场景二"></a>场景二</h2><p>输出某个班级时，对应输出其班级上所有的学生，但自动忽略学生上的班级信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/Klass"</span>)</span><br><span class="line">Class KlassController &#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(/&#123;id&#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Klass <span class="title">get</span><span class="params">(@PathVar....)</span> </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>新建注解，并且作用于班级的students中.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">KlassGet</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 班级</span></span><br><span class="line">Class Klass &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@OneToMany</span>(mappedBy = <span class="string">"klass"</span>)</span><br><span class="line">    <span class="meta">@JsonView</span>(&#123;NoneJsonView.class, KlassGet.calss&#125;)</span><br><span class="line">    <span class="keyword">private</span> Set&lt;Student&gt; students = <span class="keyword">new</span> HashSet&lt;&gt;();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在控制器上加入注解<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/Klass"</span>)</span><br><span class="line">Class KlassController &#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(/&#123;id&#125;)</span><br><span class="line">    <span class="meta">@JsonView</span>(KlassGet.calss)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Klass <span class="title">get</span><span class="params">(@PathVar....)</span> </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>此时，由于<code>Student</code>的<code>klass</code>字段，拥有注解。并且拥有的注解，不包含<code>@JsonView(KlassGet.calss)</code>，所以在序列化时，将被自动省略.</p>
+<h2 id="深入理解"><a href="#深入理解" class="headerlink" title="深入理解"></a>深入理解</h2><p>加入上述配置前，使用<code>@JsonView</code>注解时，如果字段并未设置<code>@JsonView</code>注解。那么则默认 <strong>不进行</strong> 序列化。<br>加入上述配置后，我个人的理解是：如果字段并未设置<code>@JsonView</code>注解。那么则默认 <strong>进行</strong> 序列化。<br>加入配置的前后，对于加入<code>@JsonView</code>注解的字段，判断方法相同：符合，则序列化；不符合，不序列化。</p>
+<p>这样，使用上述方法便解释了为什么加入配置后，<code>Page</code>类型便得以全部输出了。<br>这时由于<code>Page</code>并没有加入<code>@JsonView</code>，所以会全部自动序列化。</p>
+<p>在实际的使用过程中，这种思想（只有加了<code>@JsonView</code>才可能不被序列化 ）结合<code>@JsonView</code>的使用，大幅的缩减注解代码量。</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>我们将<code>@JsonView</code>注解的默认规则由：<br>只有加入了注解才可能 <strong>被</strong> 序列化<br>修改为:<br>-&gt; 只有加入了注解才可能 <strong>不被</strong> 序列化。<br>修改默认规则前：<code>Page</code>并没有加入<code>@JsonView</code>注解，默认忽略。<br>修改默认规则后：<code>Page</code>并没有加入<code>@JsonView</code>注解，默认自动转换。<br>同时，也解决了使用<code>@JsonView</code>注解时，需要大量加入注解代码的尴尬。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.mengyunzhi.cn/2017/07/30/spring-boot-mvc-JsonView-page-emtpy-object/" data-id="cjbrki354001s5ii7zciib8w0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JsonView/">@JsonView</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/09/study-jpa-ManyToMany-deeply/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          学入学习JPA的@ManyToMany注解 study jpa @ManyToMany deeply
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/17/format-json-data-in-angularjs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在angularJs中进行json数据的格式化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/chenyuanyuan/">chenyuanyuan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/chuhang/">chuhang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/gaoliming/">gaoliming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/liuxi/">liuxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/panjie/">panjie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/teacherPan/">teacherPan</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/zhangjiahao/">zhangjiahao</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">@JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ManyToMany/">@ManyToMany</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bower/">Bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JsonView/">JsonView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PagingAndSortingRepository/">PagingAndSortingRepository</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-MVC/">Spring MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularJs/">angularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/automation-documents/">automation documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backgroud/">backgroud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cascade/">cascade</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-binding/">data binding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/">documents</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forever/">forever</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/format/">format</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gateway/">gateway</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-application/">java application</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/josn/">josn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageable/">pageable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protracto/">protracto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mvc/">spring mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-Date/">sql.Date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/">translation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tute/">tute</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yeoman/">yeoman</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JsonView/" style="font-size: 10px;">@JsonView</a> <a href="/tags/ManyToMany/" style="font-size: 10px;">@ManyToMany</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/AngularJS/" style="font-size: 20px;">AngularJS</a> <a href="/tags/Bower/" style="font-size: 10px;">Bower</a> <a href="/tags/Hibernate/" style="font-size: 12.5px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 17.5px;">JPA</a> <a href="/tags/JsonView/" style="font-size: 10px;">JsonView</a> <a href="/tags/PagingAndSortingRepository/" style="font-size: 10px;">PagingAndSortingRepository</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/SpringMVC/" style="font-size: 15px;">SpringMVC</a> <a href="/tags/SpringMvc/" style="font-size: 12.5px;">SpringMvc</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/angularJs/" style="font-size: 10px;">angularJs</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/automation-documents/" style="font-size: 10px;">automation documents</a> <a href="/tags/backgroud/" style="font-size: 10px;">backgroud</a> <a href="/tags/cascade/" style="font-size: 10px;">cascade</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/data-binding/" style="font-size: 10px;">data binding</a> <a href="/tags/documents/" style="font-size: 10px;">documents</a> <a href="/tags/forever/" style="font-size: 10px;">forever</a> <a href="/tags/format/" style="font-size: 10px;">format</a> <a href="/tags/freebsd/" style="font-size: 15px;">freebsd</a> <a href="/tags/gateway/" style="font-size: 10px;">gateway</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/java-application/" style="font-size: 10px;">java application</a> <a href="/tags/josn/" style="font-size: 10px;">josn</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/macos/" style="font-size: 10px;">macos</a> <a href="/tags/maven/" style="font-size: 12.5px;">maven</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/pageable/" style="font-size: 10px;">pageable</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/protracto/" style="font-size: 10px;">protracto</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring boot</a> <a href="/tags/spring-mvc/" style="font-size: 12.5px;">spring mvc</a> <a href="/tags/sql-Date/" style="font-size: 10px;">sql.Date</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/tute/" style="font-size: 10px;">tute</a> <a href="/tags/yeoman/" style="font-size: 12.5px;">yeoman</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/29/how-to-start-measurement-project/">如何启动测量项目</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/22/instrument-audit/">计量项目前台部分Controller之间的关系</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/20/java-exception-handling/">java-exception-handling</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/java-dynamic-data-structure/">ArrayList、LinkedList和HashSet的学习总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 梦云智<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">最新文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
